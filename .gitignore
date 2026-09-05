@@ -1,0 +1,7 @@
+desktop-preview.png
+mobile-preview.png
+node_modules/
+.vercel/
+.env
+.env.*
+!.env.example
