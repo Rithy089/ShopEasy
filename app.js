@@ -274,7 +274,7 @@ function render() {
   let list = products.filter(
     (p) =>
       (brand === "All" || p.brand === brand) &&
-      `${p.brand} ${p.name} ${p.chip} ${p.storage} ${p.camera}`
+      `${p.brand} ${p.name} ${p.chip} ${p.storage} ${p.camera} ${p.desc} ${p.km} ${p.badge}`
         .toLowerCase()
         .includes(query)
   );
