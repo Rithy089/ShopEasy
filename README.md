@@ -28,16 +28,18 @@ Checked September 6, 2026:
 
 Apple imagery comes from the corresponding Apple Store product pages; Samsung imagery comes from the linked Samsung Newsroom announcement. Images show model/color collections. Product dialogs link to manufacturer information.
 
-## Validation
+## Visual system
 
-Headless Chrome checks passed: six-product rendering; combined search and brand filters; empty-state reset; ascending price sorting; comparison selection, maximum limit and table; detail dialogs and Escape; product-specific inquiry URL; language persistence; image loading; no horizontal overflow at 375, 390, 768 and 1440 pixels; no JavaScript runtime errors. Desktop and mobile screenshots were visually reviewed.
+BobbyShop retains its electric-blue accent, navy branding, local product photography, existing contact details and English/Khmer language persistence. English uses the system sans-serif stack; Khmer uses locally hosted Battambang Regular and Bold. The original font assets remain in `assets/fonts/`, with their SIL Open Font License (source: https://github.com/google/fonts/tree/main/ofl/battambang).
 
-## BobbyShop visual refresh
+Shared colors, page width and corner radii are defined in `styles.css` under `:root`. The responsive catalog uses three columns on desktop, two on tablet and one on mobile. Photography uses reserved image areas and `object-fit: contain`. Decorative reveals, tilt, gradients and image zoom have been removed; controls retain subtle feedback and respect reduced motion.
 
-The site now uses BobbyShop branding, including the favicon and Telegram inquiry text. The GitHub repository remains at its existing ShopEasy URL, and the legacy `ShopEasy.html` entry still redirects correctly.
+The header offers a search shortcut that focuses the catalog input. Active search/brand context and a reset action appear with results. Cards and dialogs clearly distinguish U.S. launch reference prices from local stock/quotes. Comparison stays available with larger checkbox targets, a keyboard-scrollable table and bottom-page space for its floating controls. Mobile navigation is non-sticky; dialog close controls remain accessible while scrolling.
 
-Battambang Regular, Bold and Black are hosted locally in `assets/fonts/` and used for English and Khmer text and form controls. The font is distributed under the included SIL Open Font License; source: https://github.com/google/fonts/tree/main/ofl/battambang.
+## Validation (September 12, 2026)
 
-The visual refresh includes a floating hero showcase, pointer tilt on desktop, section reveals, staggered card entrances, button highlights, hover zoom, dialog transitions, a reading progress line and a back-to-top button. Decorative animations stop after a few cycles. Reduced-motion preferences disable animation and pointer tilt. Mobile cards use a single column below 500px for readable bilingual text.
+Local Chrome/Playwright checks passed at 375, 768 and 1440px in English and Khmer: six products, loaded images, no document horizontal overflow, search focus, combined search/brand filters, no-results reset, all sorting modes, comparison minimum/maximum and table, all six product dialogs, Escape and focus restoration, product-specific Telegram URL contents, language persistence, reduced motion and the legacy redirect. No inquiries, orders or payments were submitted.
 
-Additional Chrome checks passed for local font loading, both languages at 320, 375, 390, 768, 1024 and 1440px, reduced motion, back-to-top navigation and the legacy redirect. Existing catalog interaction checks also passed.
+Before/after screenshots were captured locally and reviewed. Axe WCAG 2 A/AA and 2.1 AA automated scans found no violations on the catalog or product dialog at those sizes in either language. Automated checks do not replace a full assistive-technology audit.
+
+The project has no package manifest, configured lint/type-check/test runner, compilation step or production build command. Basic source checks: `node --check app.js` and `git diff --check`. Serve the existing static files with the preview command above; no deployment is required.

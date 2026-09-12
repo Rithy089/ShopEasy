@@ -95,6 +95,8 @@ const products = [
   },
 ];
 const km = {
+  searchLabel: "ស្វែងរក",
+  availability: "សូមទាក់ទងដើម្បីបញ្ជាក់ស្តុក",
   showcaseNote: "គំនិតធំ។ ទំហំតូចងាយកាន់។",
   ribbon: "បង្ហាញភាពជាអ្នក ជាមួយលទ្ធភាពថ្មីៗ។",
   announcement: "ឆ្នាំថ្មី។ ជម្រើសកាន់តែឆ្លាតវៃ។",
@@ -154,6 +156,7 @@ const km = {
   compareTitle: "ប្រៀបធៀបជម្រើសរបស់អ្នក។",
 };
 const en = {
+  availability: "Contact us to confirm stock",
   details: "View details",
   reference: "Launch price from",
   select: "Compare",
@@ -206,16 +209,17 @@ function render() {
   if (sort === "high") list.sort((a, b) => b.price - a.price);
   if (sort === "name") list.sort((a, b) => a.name.localeCompare(b.name));
   document.getElementById("result-count").textContent =
-    `${list.length} ${t("results")}`;
+    `${list.length} ${t("results")}${brand !== "All" ? ` · ${brand}` : ""}${query ? ` · “${document.getElementById("search").value.trim()}”` : ""}`;
+  document.getElementById("clear-filters").hidden =
+    brand === "All" && !query && sort === "featured";
   document.getElementById("empty").hidden = list.length > 0;
   grid.innerHTML = list
     .map(
       (p) =>
-        `<article class="product-card"><div class="product-art"><span class="badge">${lang === "km" ? "ជម្រើសឆ្នាំ ២០២៦" : p.badge}</span><label class="compare-check"><input type="checkbox" data-compare="${p.id}" aria-label="${t("select")} ${p.name}" ${selected.has(p.id) ? "checked" : ""}>${t("select")}</label><img src="assets/${p.image}.jpg" alt="${p.name} color collection" loading="lazy" width="400" height="240"></div><div class="product-info"><div class="brand">${p.brand}</div><h3>${p.name}</h3><p class="description">${lang === "km" ? p.km : p.desc}</p><div class="specs"><span>${p.display}</span><span>${p.storage}</span><span>${p.camera}</span></div><div class="card-bottom"><div class="price"><small>${t("reference")}</small><strong>${money(p.price)}</strong></div><button class="details-btn" data-detail="${p.id}" aria-label="${t("details")}: ${p.name}">${t("details")} ↗</button></div></div></article>`,
+        `<article class="product-card"><div class="product-art"><span class="badge">${lang === "km" ? "ជម្រើសឆ្នាំ ២០២៦" : p.badge}</span><img src="assets/${p.image}.jpg" alt="${p.name} color collection" loading="lazy" decoding="async" width="400" height="240"></div><div class="product-info"><div class="brand">${p.brand}</div><h3>${p.name}</h3><p class="description">${lang === "km" ? p.km : p.desc}</p><div class="specs"><span>${p.display}</span><span>${p.storage}</span><span>${p.camera}</span></div><div class="card-bottom"><div class="price"><small>${t("reference")} · USD</small><strong>${money(p.price)}</strong></div><button class="details-btn" data-detail="${p.id}" aria-label="${t("details")}: ${p.name}">${t("details")} ↗</button></div><p class="availability">${t("availability")}</p><label class="compare-check"><input type="checkbox" data-compare="${p.id}" aria-label="${t("select")} ${p.name}" ${selected.has(p.id) ? "checked" : ""}>${t("select")}</label></div></article>`,
     )
     .join("");
   updateBar();
-  revealCards();
 }
 function updateBar() {
   document.getElementById("compare-bar").hidden = !selected.size;
@@ -226,6 +230,12 @@ function updateBar() {
 function openDialog(content) {
   lastFocus = document.activeElement;
   document.getElementById("modal-body").innerHTML = content;
+  const table = modal.querySelector(".table-wrap");
+  if (table) {
+    table.tabIndex = 0;
+    table.setAttribute("role", "region");
+    table.setAttribute("aria-label", t("compareTitle"));
+  }
   if (!modal.open) modal.showModal();
   document.getElementById("close-modal").focus();
 }
@@ -234,7 +244,7 @@ function detail(id) {
   if (!p) return;
   currentModal = id;
   openDialog(
-    `<div class="modal-detail"><img src="assets/${p.image}.jpg" alt="${p.name}"><div><div class="brand">${p.brand} · 2026 COLLECTION</div><h2 id="modal-title">${p.name}</h2><p>${lang === "km" ? p.km : p.desc}</p><div class="price"><small>${t("reference")} · USD</small><strong>${money(p.price)}</strong></div><dl>${["display", "chip", "camera", "storage"].map((k) => `<div><dt>${t(k)}</dt><dd>${p[k]}</dd></div>`).join("")}</dl><p>${t("priceNote")}</p><a class="button primary" href="https://t.me/Bobbyplzy?text=${encodeURIComponent("Hi BobbyShop! I’m interested in the " + p.name + ". What is the current local price and availability?")}" target="_blank" rel="noopener">${t("inquire")} ↗</a><br><a class="source" href="${p.source}" target="_blank" rel="noopener">${t("official")}</a></div></div>`,
+    `<div class="modal-detail"><img src="assets/${p.image}.jpg" alt="${p.name} color collection" width="400" height="340"><div><div class="brand">${p.brand} · 2026</div><h2 id="modal-title">${p.name}</h2><p>${lang === "km" ? p.km : p.desc}</p><div class="price"><small>${t("reference")} · USD</small><strong>${money(p.price)}</strong></div><p class="availability">${t("availability")}</p><dl>${["display", "chip", "camera", "storage"].map((k) => `<div><dt>${t(k)}</dt><dd>${p[k]}</dd></div>`).join("")}</dl><p>${t("priceNote")}</p><a class="button primary" href="https://t.me/Bobbyplzy?text=${encodeURIComponent("Hi BobbyShop! I’m interested in the " + p.name + ". What is the current local price and availability?")}" target="_blank" rel="noopener">${t("inquire")} ↗</a><br><a class="source" href="${p.source}" target="_blank" rel="noopener">${t("official")}</a></div></div>`,
   );
 }
 function compare() {
@@ -246,6 +256,7 @@ function compare() {
   );
 }
 function setLanguage() {
+  document.getElementById("toast").hidden = true;
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-t]").forEach((el) => {
     el.innerHTML = t(el.dataset.t);
@@ -264,6 +275,21 @@ function setLanguage() {
     );
   document.getElementById("search").placeholder =
     lang === "en" ? "Find a phone…" : "ស្វែងរកទូរស័ព្ទ…";
+  document
+    .getElementById("search")
+    .setAttribute(
+      "aria-label",
+      lang === "en" ? "Search phones" : "ស្វែងរកទូរស័ព្ទ",
+    );
+  document
+    .getElementById("sort")
+    .setAttribute(
+      "aria-label",
+      lang === "en" ? "Sort phones" : "តម្រៀបទូរស័ព្ទ",
+    );
+  document
+    .getElementById("close-modal")
+    .setAttribute("aria-label", lang === "en" ? "Close dialog" : "បិទ");
   render();
   try {
     localStorage.setItem("bobbyshop-language", lang);
@@ -310,12 +336,23 @@ grid.addEventListener("change", (e) => {
 document.getElementById("compare-open").addEventListener("click", compare);
 document.getElementById("compare-clear").addEventListener("click", () => {
   selected.clear();
+  document.getElementById("toast").hidden = true;
   render();
+  document.getElementById("search").focus();
 });
 document.getElementById("reset").addEventListener("click", () => {
   document.getElementById("search").value = "";
   document.getElementById("sort").value = "featured";
   document.querySelector('[data-brand="All"]').click();
+  document.getElementById("search").focus();
+});
+document
+  .getElementById("clear-filters")
+  .addEventListener("click", () => document.getElementById("reset").click());
+document.getElementById("search-link").addEventListener("click", (event) => {
+  event.preventDefault();
+  document.getElementById("search").focus();
+  document.getElementById("search").scrollIntoView({ block: "center" });
 });
 document
   .getElementById("close-modal")
@@ -338,29 +375,10 @@ modal.addEventListener("close", () => {
 });
 setLanguage();
 
-// Animate only newly rendered cards. Native reduced-motion preferences take priority.
-function revealCards() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  grid.querySelectorAll(".product-card").forEach((card, index) => {
-    card.animate(
-      [
-        { opacity: 0, transform: "translateY(20px)" },
-        { opacity: 1, transform: "translateY(0)" },
-      ],
-      { duration: 480, delay: index * 55, easing: "cubic-bezier(.2,.7,.2,1)" },
-    );
-  });
-}
-
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-const showcase = document.querySelector(".hero-visual");
-const progress = document.querySelector(".scroll-progress");
 const backTop = document.getElementById("back-top");
 let scrollFrame = 0;
 function updateScroll() {
-  const distance = document.documentElement.scrollHeight - window.innerHeight;
-  progress.style.transform = `scaleX(${distance > 0 ? Math.min(1, window.scrollY / distance) : 0})`;
   backTop.hidden = window.scrollY < 650;
   document
     .querySelector("header")
@@ -381,48 +399,5 @@ backTop.addEventListener("click", () => {
     behavior: motionPreference.matches ? "instant" : "smooth",
   });
   document.querySelector("header .logo").focus({ preventScroll: true });
-});
-showcase.addEventListener("pointermove", (event) => {
-  if (motionPreference.matches || !finePointer.matches) return;
-  const bounds = showcase.getBoundingClientRect();
-  showcase.style.setProperty(
-    "--tilt-x",
-    `${((event.clientY - bounds.top) / bounds.height - 0.5) * -4}deg`,
-  );
-  showcase.style.setProperty(
-    "--tilt-y",
-    `${((event.clientX - bounds.left) / bounds.width - 0.5) * 4}deg`,
-  );
-});
-showcase.addEventListener("pointerleave", () => {
-  showcase.style.setProperty("--tilt-x", "0deg");
-  showcase.style.setProperty("--tilt-y", "0deg");
-});
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.08 },
-  );
-  document
-    .querySelectorAll(
-      ".benefits, .section-top, .toolbar, .help-banner, .contact-section",
-    )
-    .forEach((section) => {
-      section.classList.add("reveal");
-      observer.observe(section);
-    });
-}
-motionPreference.addEventListener("change", () => {
-  if (motionPreference.matches) {
-    document.getAnimations().forEach((animation) => animation.finish());
-    showcase.style.setProperty("--tilt-x", "0deg");
-    showcase.style.setProperty("--tilt-y", "0deg");
-  }
 });
 updateScroll();
