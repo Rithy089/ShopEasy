@@ -302,10 +302,11 @@ function render() {
   renderActiveFilters(query, sort);
 
   grid.innerHTML = list
-    .map((p) => {
+    .map((p, i) => {
       const isSelected = selected.has(p.id);
+      const delay = `${Math.min(i * 0.06, 0.48)}s`;
       return `
-        <article class="product-card" data-id="${p.id}">
+        <article class="product-card" data-id="${p.id}" style="animation-delay:${delay}">
           <div class="product-art">
             <span class="badge-pill">${getBadge(p.badge)}</span>
             <label class="compare-toggle ${isSelected ? "is-selected" : ""}" title="${t("select")} ${p.name}">
@@ -394,7 +395,17 @@ function updateBar() {
   }
   if (openBtn) {
     openBtn.disabled = selected.size < 2;
-    openBtn.innerHTML = `<span>${t("compare")}</span> <span class="compare-badge-count">(${selected.size})</span>`;
+    const badgeEl = `<span class="compare-badge-count" id="compare-badge-count">(${selected.size})</span>`;
+    openBtn.innerHTML = `<span>${t("compare")}</span> ${badgeEl}`;
+    // Trigger ping animation on badge
+    requestAnimationFrame(() => {
+      const badge = document.getElementById("compare-badge-count");
+      if (badge) {
+        badge.classList.remove("is-pinging");
+        void badge.offsetWidth; // force reflow to restart animation
+        badge.classList.add("is-pinging");
+      }
+    });
   }
 
   if (thumbsContainer) {
@@ -687,7 +698,12 @@ document.getElementById("sort").addEventListener("change", render);
 document.addEventListener("click", (e) => {
   const detailBtn = e.target.closest("[data-detail]");
   if (detailBtn) {
-    detail(detailBtn.dataset.detail);
+    // Brief loading micro-interaction before modal opens
+    detailBtn.classList.add("is-loading");
+    setTimeout(() => {
+      detail(detailBtn.dataset.detail);
+      detailBtn.classList.remove("is-loading");
+    }, 120);
     return;
   }
 
