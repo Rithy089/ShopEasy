@@ -1,5 +1,6 @@
 const samsungSource =
   "https://news.samsung.com/us/samsung-unveils-galaxy-s26-series-most-intuitive-galaxy-ai-phone-yet";
+
 const products = [
   {
     id: "pro",
@@ -14,6 +15,17 @@ const products = [
     chip: "A19 Pro",
     camera: "48MP Fusion",
     storage: "256GB",
+    storages: [
+      { size: "256GB", price: 1099 },
+      { size: "512GB", price: 1299 },
+      { size: "1TB", price: 1499 },
+    ],
+    colors: [
+      { name: "Cosmic Orange", km: "ពណ៌ទឹកក្រូច Cosmic", hex: "#e06338" },
+      { name: "Deep Blue", km: "ពណ៌ខៀវចាស់", hex: "#22354b" },
+      { name: "Natural Titanium", km: "ពណ៌ទីតានីញ៉ូមធម្មជាតិ", hex: "#9a958e" },
+      { name: "Silver", km: "ពណ៌ប្រាក់", hex: "#e2e4e6" },
+    ],
     source:
       "https://www.apple.com/newsroom/2025/09/apple-unveils-iphone-17-pro-and-iphone-17-pro-max/",
   },
@@ -30,6 +42,16 @@ const products = [
     chip: "Snapdragon 8 Elite Gen 5",
     camera: "200MP wide",
     storage: "256GB",
+    storages: [
+      { size: "256GB", price: 1299.99 },
+      { size: "512GB", price: 1419.99 },
+      { size: "1TB", price: 1659.99 },
+    ],
+    colors: [
+      { name: "Titanium Black", km: "ពណ៌ខ្មៅ Titanium", hex: "#2b2b2c" },
+      { name: "Titanium Silver", km: "ពណ៌ប្រាក់ Titanium", hex: "#c4c5c7" },
+      { name: "Titanium Violet", km: "ពណ៌ស្វាយ Titanium", hex: "#68667a" },
+    ],
     source: samsungSource,
   },
   {
@@ -45,6 +67,16 @@ const products = [
     chip: "A19",
     camera: "48MP Fusion",
     storage: "256GB",
+    storages: [
+      { size: "256GB", price: 799 },
+      { size: "512GB", price: 999 },
+    ],
+    colors: [
+      { name: "Ultramarine", km: "ពណ៌ខៀវ Ultramarine", hex: "#3b5284" },
+      { name: "Teal", km: "ពណ៌បៃតងខ្ចី Teal", hex: "#689390" },
+      { name: "White", km: "ពណ៌ស", hex: "#f2f3f5" },
+      { name: "Black", km: "ពណ៌ខ្មៅ", hex: "#2e3033" },
+    ],
     source: "https://www.apple.com/newsroom/2025/09/apple-debuts-iphone-17/",
   },
   {
@@ -60,6 +92,15 @@ const products = [
     chip: "Snapdragon 8 Elite Gen 5",
     camera: "50MP wide",
     storage: "256GB",
+    storages: [
+      { size: "256GB", price: 899.99 },
+      { size: "512GB", price: 979.99 },
+    ],
+    colors: [
+      { name: "Cobalt Violet", km: "ពណ៌ស្វាយ Cobalt", hex: "#575672" },
+      { name: "Amber Yellow", km: "ពណ៌លឿងទុំ Amber", hex: "#d9c086" },
+      { name: "Onyx Black", km: "ពណ៌ខ្មៅ Onyx", hex: "#2c2d30" },
+    ],
     source: samsungSource,
   },
   {
@@ -75,6 +116,15 @@ const products = [
     chip: "A19 Pro",
     camera: "48MP Fusion",
     storage: "256GB",
+    storages: [
+      { size: "256GB", price: 999 },
+      { size: "512GB", price: 1199 },
+    ],
+    colors: [
+      { name: "Sky Blue", km: "ពណ៌ផ្ទៃមេឃ", hex: "#769bbb" },
+      { name: "Natural Titanium", km: "ពណ៌ទីតានីញ៉ូមធម្មជាតិ", hex: "#98948d" },
+      { name: "Cloud White", km: "ពណ៌សពពក", hex: "#e8ebed" },
+    ],
     source:
       "https://www.apple.com/newsroom/2025/09/introducing-iphone-air-a-powerful-new-iphone-with-a-breakthrough-design/",
   },
@@ -91,13 +141,24 @@ const products = [
     chip: "Snapdragon 8 Elite Gen 5",
     camera: "50MP wide",
     storage: "256GB",
+    storages: [
+      { size: "256GB", price: 1099.99 },
+      { size: "512GB", price: 1179.99 },
+    ],
+    colors: [
+      { name: "Marble Gray", km: "ពណ៌ប្រផេះថ្មម៉ាប", hex: "#b8babd" },
+      { name: "Cobalt Violet", km: "ពណ៌ស្វាយ Cobalt", hex: "#575672" },
+      { name: "Onyx Black", km: "ពណ៌ខ្មៅ Onyx", hex: "#2c2d30" },
+    ],
     source: samsungSource,
   },
 ];
+
 const km = {
   searchLabel: "ស្វែងរក",
   availability: "សូមទាក់ទងដើម្បីបញ្ជាក់ស្តុក",
   announcement: "ឆ្នាំថ្មី។ ជម្រើសកាន់តែឆ្លាតវៃ។",
+  collectionLink: "ជម្រើសសម្រាប់ឆ្នាំ ២០២៦",
   phones: "ទូរស័ព្ទ",
   about: "អំពីយើង",
   contact: "ទំនាក់ទំនង",
@@ -105,7 +166,7 @@ const km = {
   collection: "ជម្រើសសម្រាប់ឆ្នាំ ២០២៦",
   headline: "ទូរស័ព្ទថ្មីរបស់អ្នក។<br><span class=\"accent-text\">ជ្រើសរើសយ៉ាងងាយស្រួល។</span>",
   heroText:
-    "ទូរស័ព្ទល្អៗ។ ជម្រើសច្បាស់លាស់។ ស្វែងរកទូរស័ព្ទសម្រាប់ប្រើប្រាស់ប្រចាំថ្ងៃ និងការច្នៃប្រឌិតរបស់អ្នក។",
+    "ទូរស័ព្ទល្អៗ។ ជម្រើសច្បាស់លាស់។ ស្វែងរកទូរស័ព្ទសម្រាប់ការប្រើប្រាស់ប្រចាំថ្ងៃ និងការច្នៃប្រឌិតរបស់អ្នក។",
   explore: "មើលទូរស័ព្ទទាំងអស់",
   chatShort: "សួរតម្លៃ និងស្តុក",
   local: "ជម្រើសបច្ចេកវិទ្យានៅជិតអ្នក។<br>រាជធានីភ្នំពេញ ប្រទេសកម្ពុជា។",
@@ -118,7 +179,7 @@ const km = {
   benefit3Desc: "ជជែកផ្ទាល់ជាមួយ Bobby សម្រាប់ស្តុក និងតម្លៃ",
   lineup: "ជម្រើសទូរស័ព្ទ",
   find: "ស្វែងរកទូរស័ព្ទដែលអ្នកពេញចិត្ត។",
-  catalogText: "គំនិតថ្មី។ រចនាស្អាត។<br>ទូរស័ព្ទសមស្របសម្រាប់អ្នក។",
+  catalogText: "គំនិតថ្មីៗ។ រចនាសអាត។<br>ទូរស័ព្ទសមស្របសម្រាប់អ្នក។",
   all: "ទាំងអស់",
   featured: "ជម្រើសណែនាំ",
   priceLow: "តម្លៃ៖ ទាបទៅខ្ពស់",
@@ -153,20 +214,28 @@ const km = {
   chip: "បន្ទះឈីប (អាមេរិក)",
   camera: "កាមេរ៉ាចម្បង",
   storage: "ទំហំផ្ទុក",
+  storageLabel: "ជម្រើសទំហំផ្ទុក",
+  colorLabel: "ពណ៌",
+  quantityLabel: "ចំនួន",
   inquire: "សួរតម្លៃ និងស្តុកលើ Telegram",
   official: "ព័ត៌មានពីក្រុមហ៊ុនផលិត",
   limit: "អ្នកអាចប្រៀបធៀបបានរហូតដល់ ៣ ទូរស័ព្ទ។",
+  limitNeedTwo: "សូមជ្រើសរើសយ៉ាងហោចណាស់ ២ ទូរស័ព្ទដើម្បីប្រៀបធៀប។",
   selected: "បានជ្រើសរើស",
-  results: "ទូរស័ព្ទ",
+  results: "ទូរស័ព្ទមានក្នុងបញ្ជី",
   compareTitle: "ប្រៀបធៀបលក្ខណៈបច្ចេកទេស",
   modelYear: "ម៉ូដែលឆ្នាំ ២០២៦",
   genuineNotice: "ឧបករណ៍សុទ្ធ និងការធានាផ្លូវការពីរោងចក្រ",
-  directInquiry: "ផ្ញើសារសួរតម្លៃភ្លាមៗ",
+  directInquiry: "ផ្ញើសារសួរតម្លៃភ្លាមៗ៖",
   sortLabel: "តម្រៀបតាម",
+  localAssurance: "ទាក់ទង BobbyShop នៅភ្នំពេញ សម្រាប់ការផ្ទៀងផ្ទាត់ស្តុក និងការដឹកជញ្ជូនរហ័ស។",
 };
 
 const en = {
+  searchLabel: "Search",
   availability: "Contact to confirm stock",
+  announcement: "A fresh year. A smarter upgrade.",
+  collectionLink: "THE 2026 COLLECTION",
   details: "View details",
   reference: "Launch MSRP from",
   select: "Compare",
@@ -174,9 +243,13 @@ const en = {
   chip: "Chip (U.S. spec)",
   camera: "Main camera",
   storage: "Base storage",
+  storageLabel: "Storage capacity",
+  colorLabel: "Color finish",
+  quantityLabel: "Quantity",
   inquire: "Ask for Price & Stock on Telegram",
   official: "Official manufacturer specifications",
   limit: "You can compare up to 3 phones. Remove one to add another.",
+  limitNeedTwo: "Select at least 2 phones to view side-by-side comparison.",
   selected: "phones selected",
   results: "phones available",
   compareTitle: "Side-by-side comparison",
@@ -184,11 +257,14 @@ const en = {
   genuineNotice: "Authentic hardware with original factory packaging",
   directInquiry: "Instant Telegram quote",
   sortLabel: "Sort by",
+  localAssurance: "Contact BobbyShop in Phnom Penh for verified local stock and swift delivery.",
 };
 
+// Harvest existing DOM text for English defaults
 document.querySelectorAll("[data-t]").forEach((el) => {
   en[el.dataset.t] = el.innerHTML;
 });
+
 let lang = "en";
 try {
   lang =
@@ -197,19 +273,32 @@ try {
       ? "km"
       : "en";
 } catch {}
+
 let brand = "All";
 const selected = new Set();
 const grid = document.getElementById("products-container");
 const modal = document.getElementById("product-modal");
 let lastFocus;
 let currentModal = null;
+
+// Modal interactive state
+let modalState = {
+  productId: null,
+  selectedStorage: null,
+  selectedPrice: null,
+  selectedColor: null,
+  quantity: 1,
+};
+
 const t = (key) => (lang === "km" ? km[key] : en[key]) || en[key] || key;
+
 const money = (n) =>
   new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: n % 1 ? 2 : 0,
   }).format(n);
+
 const badgeTranslations = {
   "The pro pick": { en: "The pro pick", km: "ជម្រើសកម្រិតខ្ពស់" },
   "2026 flagship": { en: "2026 flagship", km: "កំពូលទូរស័ព្ទ ២០២៦" },
@@ -249,8 +338,8 @@ function renderActiveFilters(query, sort) {
   }
   if (sort && sort !== "featured") {
     const sortLabels = {
-      low: lang === "km" ? "តម្លៃទាប" : "Price: Low",
-      high: lang === "km" ? "តម្លៃខ្ពស់" : "Price: High",
+      low: lang === "km" ? "តម្លៃ៖ ទាប" : "Price: Low",
+      high: lang === "km" ? "តម្លៃ៖ ខ្ពស់" : "Price: High",
       name: lang === "km" ? "ឈ្មោះ A–Z" : "Name A–Z",
     };
     chips.push(
@@ -265,7 +354,7 @@ function renderActiveFilters(query, sort) {
 
 function render() {
   const searchInput = document.getElementById("search");
-  const query = searchInput.value.trim().toLowerCase();
+  const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
   const searchClearBtn = document.getElementById("search-clear");
   if (searchClearBtn) {
     searchClearBtn.hidden = !query;
@@ -279,7 +368,8 @@ function render() {
         .includes(query)
   );
 
-  const sort = document.getElementById("sort").value;
+  const sortSelect = document.getElementById("sort");
+  const sort = sortSelect ? sortSelect.value : "featured";
   if (sort === "low") list.sort((a, b) => a.price - b.price);
   if (sort === "high") list.sort((a, b) => b.price - a.price);
   if (sort === "name") list.sort((a, b) => a.name.localeCompare(b.name));
@@ -301,10 +391,12 @@ function render() {
 
   renderActiveFilters(query, sort);
 
+  if (!grid) return;
+
   grid.innerHTML = list
     .map((p, i) => {
       const isSelected = selected.has(p.id);
-      const delay = `${Math.min(i * 0.06, 0.48)}s`;
+      const delay = `${Math.min(i * 0.05, 0.4)}s`;
       return `
         <article class="product-card" data-id="${p.id}" style="animation-delay:${delay}">
           <div class="product-art">
@@ -321,7 +413,7 @@ function render() {
             <div class="product-img-box">
               <img
                 src="assets/${p.image}.jpg"
-                alt="${p.name} color lineup"
+                alt="${p.name} official photograph"
                 loading="lazy"
                 decoding="async"
                 width="400"
@@ -386,26 +478,25 @@ function updateBar() {
   const countEl = document.getElementById("selected-count");
   const openBtn = document.getElementById("compare-open");
   const thumbsContainer = document.getElementById("compare-thumbnails");
+  const navCompareBtn = document.getElementById("nav-compare-btn");
+  const navCompareCount = document.getElementById("nav-compare-count");
+
+  const count = selected.size;
+
+  if (navCompareBtn && navCompareCount) {
+    navCompareBtn.hidden = count === 0;
+    navCompareCount.textContent = count;
+  }
 
   if (!bar) return;
-  bar.hidden = !selected.size;
+  bar.hidden = count === 0;
 
   if (countEl) {
-    countEl.textContent = `${selected.size}/3 ${t("selected")}`;
+    countEl.textContent = `${count}/3 ${t("selected")}`;
   }
   if (openBtn) {
-    openBtn.disabled = selected.size < 2;
-    const badgeEl = `<span class="compare-badge-count" id="compare-badge-count">(${selected.size})</span>`;
-    openBtn.innerHTML = `<span>${t("compare")}</span> ${badgeEl}`;
-    // Trigger ping animation on badge
-    requestAnimationFrame(() => {
-      const badge = document.getElementById("compare-badge-count");
-      if (badge) {
-        badge.classList.remove("is-pinging");
-        void badge.offsetWidth; // force reflow to restart animation
-        badge.classList.add("is-pinging");
-      }
-    });
+    openBtn.disabled = count < 2;
+    openBtn.innerHTML = `<span>${t("compare")}</span> <span class="compare-badge-count">(${count})</span>`;
   }
 
   if (thumbsContainer) {
@@ -437,16 +528,103 @@ function openDialog(content) {
   document.getElementById("close-modal").focus();
 }
 
+function buildTelegramInquiryUrl(product, storage, color, quantity) {
+  const storageText = storage ? storage.size : product.storage;
+  const colorText = color
+    ? lang === "km"
+      ? color.km
+      : color.name
+    : "";
+  const qty = quantity || 1;
+
+  const text =
+    lang === "km"
+      ? `សួស្តី BobbyShop! ខ្ញុំចាប់អារម្មណ៍លើ ${product.name} (${storageText}${colorText ? `, ${colorText}` : ""}) ចំនួន៖ ${qty}។ តើមានស្តុក និងតម្លៃក្នុងស្រុកបច្ចុប្បន្នប៉ុន្មានដែរ?`
+      : `Hi BobbyShop! I am interested in the ${product.name} (${storageText}${colorText ? `, ${colorText}` : ""}), Quantity: ${qty}. What is the current local Phnom Penh price and stock availability?`;
+
+  return `https://t.me/Bobbyplzy?text=${encodeURIComponent(text)}`;
+}
+
+function updateModalView() {
+  const p = products.find((item) => item.id === modalState.productId);
+  if (!p) return;
+
+  const currentStorage =
+    p.storages.find((s) => s.size === modalState.selectedStorage) ||
+    p.storages[0];
+  const currentColor =
+    p.colors.find((c) => c.name === modalState.selectedColor) || p.colors[0];
+  const currentPrice = currentStorage ? currentStorage.price : p.price;
+  const qty = modalState.quantity || 1;
+
+  // Update price in modal
+  const priceValEl = document.getElementById("modal-price-display");
+  if (priceValEl) {
+    priceValEl.textContent = money(currentPrice * qty);
+  }
+
+  // Update storage active states
+  document.querySelectorAll(".storage-pill-btn").forEach((btn) => {
+    const isCur = btn.dataset.storageSize === currentStorage.size;
+    btn.classList.toggle("is-active", isCur);
+    btn.setAttribute("aria-pressed", String(isCur));
+  });
+
+  // Update color active states and label
+  document.querySelectorAll(".color-swatch-btn").forEach((btn) => {
+    const isCur = btn.dataset.colorName === currentColor.name;
+    btn.classList.toggle("is-active", isCur);
+    btn.setAttribute("aria-pressed", String(isCur));
+  });
+
+  const activeColorLabel = document.getElementById("modal-active-color-name");
+  if (activeColorLabel) {
+    activeColorLabel.textContent =
+      lang === "km" ? currentColor.km : currentColor.name;
+  }
+
+  // Update quantity display
+  const qtyDisplay = document.getElementById("modal-qty-value");
+  if (qtyDisplay) {
+    qtyDisplay.textContent = qty;
+  }
+
+  // Update Telegram inquiry button URL
+  const inquiryBtn = document.getElementById("modal-telegram-inquiry-btn");
+  if (inquiryBtn) {
+    inquiryBtn.href = buildTelegramInquiryUrl(
+      p,
+      currentStorage,
+      currentColor,
+      qty
+    );
+  }
+
+  // Update compare toggle state in modal
+  const modalCompareBtn = document.getElementById("modal-compare-toggle-btn");
+  if (modalCompareBtn) {
+    const isComp = selected.has(p.id);
+    modalCompareBtn.classList.toggle("is-active", isComp);
+    modalCompareBtn.setAttribute("aria-pressed", String(isComp));
+    modalCompareBtn.querySelector(".modal-compare-btn-text").textContent = isComp
+      ? t("inCompare")
+      : t("addToCompare");
+  }
+}
+
 function detail(id) {
   const p = products.find((item) => item.id === id);
   if (!p) return;
   currentModal = id;
 
-  const inquiryText = encodeURIComponent(
-    lang === "km"
-      ? `សួស្តី BobbyShop! ខ្ញុំចាប់អារម្មណ៍លើ ${p.name} (${p.storage})។ តើមានស្តុក និងតម្លៃក្នុងស្រុកបច្ចុប្បន្នប៉ុន្មានដែរ?`
-      : `Hi BobbyShop! I am interested in the ${p.name} (${p.storage}). What is the current local Phnom Penh price and availability?`
-  );
+  modalState.productId = p.id;
+  modalState.selectedStorage = p.storages[0].size;
+  modalState.selectedPrice = p.storages[0].price;
+  modalState.selectedColor = p.colors[0].name;
+  modalState.quantity = 1;
+
+  const defaultColor = p.colors[0];
+  const isSelected = selected.has(p.id);
 
   openDialog(`
     <div class="modal-detail">
@@ -476,12 +654,90 @@ function detail(id) {
         <h2 id="modal-title" class="modal-title">${p.name}</h2>
         <p class="modal-desc">${lang === "km" ? p.km : p.desc}</p>
 
+        <!-- Dynamic Reference Price Box -->
         <div class="modal-price-box">
           <div class="price-meta-label">${t("reference")} · USD</div>
-          <div class="modal-price-val">${money(p.price)}</div>
+          <div class="modal-price-val" id="modal-price-display">${money(p.storages[0].price)}</div>
           <div class="price-disclaimer">${t("priceNote")}</div>
         </div>
 
+        <!-- Interactive Storage Selector -->
+        <div class="variant-section">
+          <div class="variant-label-row">
+            <span class="variant-label">${t("storageLabel")}</span>
+          </div>
+          <div class="storage-options-grid" role="group" aria-label="${t("storageLabel")}">
+            ${p.storages
+              .map(
+                (s, idx) => `
+              <button
+                type="button"
+                class="storage-pill-btn ${idx === 0 ? "is-active" : ""}"
+                data-storage-size="${s.size}"
+                aria-pressed="${idx === 0 ? "true" : "false"}"
+              >
+                <span class="storage-size">${s.size}</span>
+                <span class="storage-price">${money(s.price)}</span>
+              </button>
+            `
+              )
+              .join("")}
+          </div>
+        </div>
+
+        <!-- Interactive Color Finish Selector -->
+        <div class="variant-section">
+          <div class="variant-label-row">
+            <span class="variant-label">${t("colorLabel")}:</span>
+            <strong class="variant-value" id="modal-active-color-name">
+              ${lang === "km" ? defaultColor.km : defaultColor.name}
+            </strong>
+          </div>
+          <div class="color-swatches-row" role="group" aria-label="${t("colorLabel")}">
+            ${p.colors
+              .map(
+                (c, idx) => `
+              <button
+                type="button"
+                class="color-swatch-btn ${idx === 0 ? "is-active" : ""}"
+                data-color-name="${c.name}"
+                title="${lang === "km" ? c.km : c.name}"
+                aria-label="${lang === "km" ? c.km : c.name}"
+                aria-pressed="${idx === 0 ? "true" : "false"}"
+              >
+                <span class="color-dot" style="background-color: ${c.hex}"></span>
+              </button>
+            `
+              )
+              .join("")}
+          </div>
+        </div>
+
+        <!-- Quantity Selector & Comparison Quick Action -->
+        <div class="modal-row-actions">
+          <div class="quantity-wrapper">
+            <label class="quantity-label" for="modal-qty-btn-minus">${t("quantityLabel")}</label>
+            <div class="quantity-selector">
+              <button type="button" class="qty-btn" id="modal-qty-btn-minus" aria-label="Decrease quantity">−</button>
+              <span class="qty-value" id="modal-qty-value" aria-live="polite">1</span>
+              <button type="button" class="qty-btn" id="modal-qty-btn-plus" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="button outline-sm modal-compare-btn ${isSelected ? "is-active" : ""}"
+            id="modal-compare-toggle-btn"
+            data-compare-product="${p.id}"
+            aria-pressed="${isSelected ? "true" : "false"}"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>
+            </svg>
+            <span class="modal-compare-btn-text">${isSelected ? t("inCompare") : t("addToCompare")}</span>
+          </button>
+        </div>
+
+        <!-- Technical Specs Grid -->
         <div class="specs-grid-dialog">
           <div class="spec-card">
             <div class="spec-card-label">${t("display")}</div>
@@ -501,18 +757,22 @@ function detail(id) {
           </div>
         </div>
 
+        <!-- Store Credibility & Assurance Note -->
         <div class="modal-local-stock-card">
           <div class="stock-status-banner">
             <span class="status-dot-pulse"></span>
             <strong>${t("availability")}</strong>
           </div>
           <p class="stock-note-small">${t("genuineNotice")}</p>
+          <p class="stock-note-small local-note">${t("localAssurance")}</p>
         </div>
 
+        <!-- Primary Telegram Quote Inquiry Button -->
         <div class="modal-actions-area">
           <a
             class="button telegram-primary-btn"
-            href="https://t.me/Bobbyplzy?text=${inquiryText}"
+            id="modal-telegram-inquiry-btn"
+            href="${buildTelegramInquiryUrl(p, p.storages[0], defaultColor, 1)}"
             target="_blank"
             rel="noopener"
           >
@@ -526,17 +786,88 @@ function detail(id) {
       </div>
     </div>
   `);
+
+  // Attach interactive listeners inside the modal
+  const modalEl = document.getElementById("product-modal");
+  modalEl.querySelectorAll(".storage-pill-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      modalState.selectedStorage = btn.dataset.storageSize;
+      updateModalView();
+    });
+  });
+
+  modalEl.querySelectorAll(".color-swatch-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      modalState.selectedColor = btn.dataset.colorName;
+      updateModalView();
+    });
+  });
+
+  const btnMinus = document.getElementById("modal-qty-btn-minus");
+  if (btnMinus) {
+    btnMinus.addEventListener("click", () => {
+      if (modalState.quantity > 1) {
+        modalState.quantity -= 1;
+        updateModalView();
+      }
+    });
+  }
+
+  const btnPlus = document.getElementById("modal-qty-btn-plus");
+  if (btnPlus) {
+    btnPlus.addEventListener("click", () => {
+      if (modalState.quantity < 10) {
+        modalState.quantity += 1;
+        updateModalView();
+      }
+    });
+  }
+
+  const compareToggleBtn = document.getElementById("modal-compare-toggle-btn");
+  if (compareToggleBtn) {
+    compareToggleBtn.addEventListener("click", () => {
+      if (selected.has(p.id)) {
+        selected.delete(p.id);
+      } else {
+        if (selected.size === 3) {
+          const toast = document.getElementById("toast");
+          if (toast) {
+            toast.textContent = t("limit");
+            toast.hidden = false;
+            setTimeout(() => (toast.hidden = true), 3500);
+          }
+          return;
+        }
+        selected.add(p.id);
+      }
+      render();
+      updateModalView();
+    });
+  }
 }
 
 function compare() {
-  if (selected.size < 2) return;
+  if (selected.size < 2) {
+    const toast = document.getElementById("toast");
+    if (toast) {
+      toast.textContent = t("limitNeedTwo");
+      toast.hidden = false;
+      setTimeout(() => (toast.hidden = true), 3500);
+    }
+    return;
+  }
+
   currentModal = "compare";
   const list = products.filter((p) => selected.has(p.id));
 
   openDialog(`
     <div class="compare-modal-header">
       <h2 id="modal-title" class="modal-title">${t("compareTitle")}</h2>
-      <p class="compare-subtitle">${lang === "km" ? "ប្រៀបធៀបលក្ខណៈសម្បត្តិទូរស័ព្ទដែលបានជ្រើសរើស" : "Review technical specifications side-by-side"}</p>
+      <p class="compare-subtitle">${
+        lang === "km"
+          ? "ប្រៀបធៀបលក្ខណៈសម្បត្តិទូរស័ព្ទដែលបានជ្រើសរើស"
+          : "Review technical specifications side-by-side"
+      }</p>
     </div>
     <div class="table-wrap">
       <table class="compare-table">
@@ -553,9 +884,7 @@ function compare() {
                     <div class="compare-head-price">${money(p.price)}</div>
                     <a
                       class="button compare-inquire-btn"
-                      href="https://t.me/Bobbyplzy?text=${encodeURIComponent(
-                        "Hi BobbyShop! I am comparing the " + p.name + ". Can you provide a quote?"
-                      )}"
+                      href="${buildTelegramInquiryUrl(p, p.storages[0], p.colors[0], 1)}"
                       target="_blank"
                       rel="noopener"
                     >
@@ -601,6 +930,7 @@ function compare() {
     </div>
   `);
 }
+
 function setLanguage() {
   const toast = document.getElementById("toast");
   if (toast) toast.hidden = true;
@@ -634,7 +964,9 @@ function setLanguage() {
   const search = document.getElementById("search");
   if (search) {
     search.placeholder =
-      lang === "en" ? "Find a phone, chip, or brand…" : "ស្វែងរកទូរស័ព្ទ បន្ទះឈីប ឬម៉ាក…";
+      lang === "en"
+        ? "Find a phone, chip, or brand…"
+        : "ស្វែងរកទូរស័ព្ទ បន្ទះឈីប ឬម៉ាក…";
     search.setAttribute(
       "aria-label",
       lang === "en" ? "Search phones" : "ស្វែងរកទូរស័ព្ទ"
@@ -664,10 +996,14 @@ function setLanguage() {
   } catch {}
 }
 
-document.getElementById("language").addEventListener("click", () => {
-  lang = lang === "en" ? "km" : "en";
-  setLanguage();
-});
+// Global Event Listeners
+const langButton = document.getElementById("language");
+if (langButton) {
+  langButton.addEventListener("click", () => {
+    lang = lang === "en" ? "km" : "en";
+    setLanguage();
+  });
+}
 
 document.querySelectorAll("[data-brand]").forEach((button) =>
   button.addEventListener("click", () => {
@@ -681,10 +1017,12 @@ document.querySelectorAll("[data-brand]").forEach((button) =>
 );
 
 const searchInputEl = document.getElementById("search");
-searchInputEl.addEventListener("input", render);
+if (searchInputEl) {
+  searchInputEl.addEventListener("input", render);
+}
 
 const searchClearEl = document.getElementById("search-clear");
-if (searchClearEl) {
+if (searchClearEl && searchInputEl) {
   searchClearEl.addEventListener("click", () => {
     searchInputEl.value = "";
     searchInputEl.focus();
@@ -692,18 +1030,58 @@ if (searchClearEl) {
   });
 }
 
-document.getElementById("sort").addEventListener("change", render);
+const sortSelectEl = document.getElementById("sort");
+if (sortSelectEl) {
+  sortSelectEl.addEventListener("change", render);
+}
 
-// Delegate click on details buttons and active chips
+// Header Search Trigger: Focus and highlight search box
+const searchLink = document.getElementById("search-link");
+if (searchLink && searchInputEl) {
+  searchLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    searchInputEl.focus();
+    searchInputEl.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    const searchWrap = document.getElementById("search-box-wrap");
+    if (searchWrap) {
+      searchWrap.classList.remove("search-highlight");
+      void searchWrap.offsetWidth;
+      searchWrap.classList.add("search-highlight");
+    }
+  });
+}
+
+// Header Compare Button
+const navCompareBtn = document.getElementById("nav-compare-btn");
+if (navCompareBtn) {
+  navCompareBtn.addEventListener("click", () => {
+    if (selected.size >= 2) {
+      compare();
+    } else if (selected.size === 1) {
+      const toast = document.getElementById("toast");
+      if (toast) {
+        toast.textContent = t("limitNeedTwo");
+        toast.hidden = false;
+        setTimeout(() => (toast.hidden = true), 3500);
+      }
+      const compareBar = document.getElementById("compare-bar");
+      if (compareBar) {
+        compareBar.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  });
+}
+
+// Global click delegation
 document.addEventListener("click", (e) => {
   const detailBtn = e.target.closest("[data-detail]");
   if (detailBtn) {
-    // Brief loading micro-interaction before modal opens
     detailBtn.classList.add("is-loading");
     setTimeout(() => {
       detail(detailBtn.dataset.detail);
       detailBtn.classList.remove("is-loading");
-    }, 120);
+    }, 100);
     return;
   }
 
@@ -719,105 +1097,116 @@ document.addEventListener("click", (e) => {
   if (activeChip) {
     const type = activeChip.dataset.filterType;
     if (type === "brand") {
-      document.querySelector('[data-brand="All"]').click();
-    } else if (type === "query") {
+      const allBtn = document.querySelector('[data-brand="All"]');
+      if (allBtn) allBtn.click();
+    } else if (type === "query" && searchInputEl) {
       searchInputEl.value = "";
       render();
-    } else if (type === "sort") {
-      document.getElementById("sort").value = "featured";
+    } else if (type === "sort" && sortSelectEl) {
+      sortSelectEl.value = "featured";
       render();
     }
     return;
   }
 });
 
+// Compare checkbox change on product cards
 let toastTimer;
-grid.addEventListener("change", (e) => {
-  const id = e.target.dataset.compare;
-  if (!id) return;
-  if (e.target.checked) {
-    if (selected.size === 3) {
-      e.target.checked = false;
-      const toast = document.getElementById("toast");
-      toast.textContent = t("limit");
-      toast.hidden = false;
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => (toast.hidden = true), 3500);
-      return;
+if (grid) {
+  grid.addEventListener("change", (e) => {
+    const id = e.target.dataset.compare;
+    if (!id) return;
+    if (e.target.checked) {
+      if (selected.size === 3) {
+        e.target.checked = false;
+        const toast = document.getElementById("toast");
+        if (toast) {
+          toast.textContent = t("limit");
+          toast.hidden = false;
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => (toast.hidden = true), 3500);
+        }
+        return;
+      }
+      selected.add(id);
+    } else {
+      selected.delete(id);
     }
-    selected.add(id);
-  } else {
-    selected.delete(id);
-  }
-  render();
-});
+    render();
+  });
+}
 
-document.getElementById("compare-open").addEventListener("click", compare);
+const compareOpenBtn = document.getElementById("compare-open");
+if (compareOpenBtn) {
+  compareOpenBtn.addEventListener("click", compare);
+}
 
-document.getElementById("compare-clear").addEventListener("click", () => {
-  selected.clear();
-  const toast = document.getElementById("toast");
-  if (toast) toast.hidden = true;
-  render();
-});
+const compareClearBtn = document.getElementById("compare-clear");
+if (compareClearBtn) {
+  compareClearBtn.addEventListener("click", () => {
+    selected.clear();
+    const toast = document.getElementById("toast");
+    if (toast) toast.hidden = true;
+    render();
+  });
+}
 
-document.getElementById("reset").addEventListener("click", () => {
-  searchInputEl.value = "";
-  document.getElementById("sort").value = "featured";
-  document.querySelector('[data-brand="All"]').click();
-  searchInputEl.focus();
-});
+const resetBtn = document.getElementById("reset");
+if (resetBtn && searchInputEl && sortSelectEl) {
+  resetBtn.addEventListener("click", () => {
+    searchInputEl.value = "";
+    sortSelectEl.value = "featured";
+    const allBtn = document.querySelector('[data-brand="All"]');
+    if (allBtn) allBtn.click();
+    searchInputEl.focus();
+  });
+}
 
 const clearFiltersBtn = document.getElementById("clear-filters");
-if (clearFiltersBtn) {
+if (clearFiltersBtn && resetBtn) {
   clearFiltersBtn.addEventListener("click", () => {
-    document.getElementById("reset").click();
+    resetBtn.click();
   });
 }
 
-const searchLink = document.getElementById("search-link");
-if (searchLink) {
-  searchLink.addEventListener("click", (event) => {
-    event.preventDefault();
-    searchInputEl.focus();
-    searchInputEl.scrollIntoView({ behavior: "smooth", block: "center" });
-  });
+const closeModalBtn = document.getElementById("close-modal");
+if (closeModalBtn && modal) {
+  closeModalBtn.addEventListener("click", () => modal.close());
 }
 
-document.getElementById("close-modal").addEventListener("click", () => modal.close());
-
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    const r = modal.getBoundingClientRect();
-    if (
-      e.clientX < r.left ||
-      e.clientX > r.right ||
-      e.clientY < r.top ||
-      e.clientY > r.bottom
-    ) {
-      modal.close();
+if (modal) {
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      const r = modal.getBoundingClientRect();
+      if (
+        e.clientX < r.left ||
+        e.clientX > r.right ||
+        e.clientY < r.top ||
+        e.clientY > r.bottom
+      ) {
+        modal.close();
+      }
     }
-  }
-});
+  });
 
-modal.addEventListener("close", () => {
-  currentModal = null;
-  if (lastFocus?.isConnected) lastFocus.focus();
-});
+  modal.addEventListener("close", () => {
+    currentModal = null;
+    if (lastFocus && lastFocus.isConnected) lastFocus.focus();
+  });
+}
 
-setLanguage();
-
+// Motion preference and scroll actions
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const backTop = document.getElementById("back-top");
 let scrollFrame = 0;
 
 function updateScroll() {
   if (backTop) {
-    backTop.hidden = window.scrollY < 600;
+    backTop.hidden = window.scrollY < 500;
   }
-  const header = document.getElementById("main-header") || document.querySelector("header");
+  const header = document.getElementById("main-header");
   if (header) {
-    header.classList.toggle("is-scrolled", window.scrollY > 20);
+    header.classList.toggle("is-scrolled", window.scrollY > 15);
   }
   scrollFrame = 0;
 }
@@ -843,4 +1232,6 @@ if (backTop) {
   });
 }
 
+// Initialize on load
+setLanguage();
 updateScroll();
