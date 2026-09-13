@@ -201,7 +201,7 @@ p {
 
 /* Announcement Banner */
 .announcement {
-  background: var(--ink);
+  background: #0f172a;
   color: #f8fafc;
   display: flex;
   justify-content: space-between;
@@ -349,7 +349,7 @@ header.is-scrolled {
   justify-content: center;
   width: 36px;
   height: 36px;
-  background: var(--ink);
+  background: #0f172a;
   border-radius: var(--radius-sm);
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
@@ -575,9 +575,9 @@ header.is-scrolled {
 }
 
 .contact-nav {
-  background: var(--ink);
+  background: #0f172a;
   color: #ffffff;
-  border-color: var(--ink);
+  border-color: #0f172a;
   gap: 6px;
 }
 
@@ -948,7 +948,7 @@ main {
 .hero-image-wrap {
   width: 100%;
   height: 230px;
-  background: #f8fafc;
+  background: var(--surface-subtle);
   border-radius: var(--radius-md);
   padding: 16px;
   display: flex;
@@ -1334,7 +1334,7 @@ main {
 }
 
 .active-chip:hover {
-  background: #e0edff;
+  background: var(--accent-subtle);
   transform: translateY(-1px);
 }
 
@@ -1390,7 +1390,7 @@ main {
 
 .product-card {
   background: var(--surface);
-  border: 1px solid var(--neutral-200);
+  border: 1px solid var(--line);
   border-radius: var(--radius-2xl);
   overflow: hidden;
   display: flex;
@@ -1429,15 +1429,15 @@ main {
 
 .product-card:hover {
   transform: translateY(-8px);
-  border-color: var(--neutral-300);
+  border-color: var(--line-strong);
   box-shadow: var(--shadow-xl);
 }
 
 .product-art {
   position: relative;
   height: 250px;
-  background: var(--neutral-50);
-  border-bottom: 1px solid var(--neutral-200);
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--line);
   padding: 16px;
   display: flex;
   align-items: center;
@@ -1446,7 +1446,7 @@ main {
 }
 
 .product-card:hover .product-art {
-  background: #fdfefe;
+  background: var(--surface-subtle);
 }
 
 .badge-pill {
@@ -1813,7 +1813,7 @@ main {
 
 /* About / Help Banner */
 .help-banner {
-  background: var(--ink);
+  background: #0f172a;
   color: #ffffff;
   border-radius: var(--radius-xl);
   padding: 44px;
@@ -2190,7 +2190,7 @@ footer {
 dialog {
   width: min(880px, calc(100% - 32px));
   max-height: 88vh;
-  border: 1px solid var(--neutral-200);
+  border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   padding: 0;
   color: var(--ink);
@@ -2248,7 +2248,7 @@ dialog::backdrop {
 
 .modal-image-container {
   position: relative;
-  background: #f8fafc;
+  background: var(--surface-subtle);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   padding: 24px;
@@ -2557,7 +2557,7 @@ dialog::backdrop {
   bottom: 90px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--ink);
+  background: #0f172a;
   color: #ffffff;
   padding: 12px 20px;
   border-radius: var(--radius-sm);
@@ -2659,7 +2659,7 @@ html[lang="km"] .filter-pill {
 
 .product-card:hover .card-config-box {
   border-color: var(--line-strong);
-  background: #f8fafc;
+  background: var(--surface);
 }
 
 .config-header {
@@ -3146,9 +3146,9 @@ html[lang="km"] .filter-pill {
 .quiz-matched-reason {
   font-size: 13.5px;
   line-height: 1.5;
-  color: var(--muted);
+  color: var(--ink-soft);
   margin-bottom: 14px;
-  background: #ffffff;
+  background: var(--surface);
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--line);
@@ -3202,7 +3202,7 @@ html[lang="km"] .filter-pill {
   }
 }
 
-/* OLED Dark Mode / Light Mode Theme Styles */
+/* OLED Dark Mode / Light Mode Theme Styles & Contrast Fixes */
 [data-theme="dark"] {
   --accent: #3b82f6;
   --accent-hover: #60a5fa;
@@ -3222,30 +3222,57 @@ html[lang="km"] .filter-pill {
   --line: #222634;
   --line-strong: #2f3547;
 
+  --success-soft: rgba(16, 185, 129, 0.12);
+
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
+  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
 
   color-scheme: dark;
 }
 
-[data-theme="dark"] .product-art {
-  background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.25) 100%);
+/* Announcement Bar */
+[data-theme="dark"] .announcement {
+  background: #05070d;
+  color: #cbd5e1;
+  border-bottom: 1px solid var(--line);
 }
 
-[data-theme="dark"] .quiz-banner {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(19, 22, 32, 0.9) 100%);
-  border-color: var(--line);
+[data-theme="dark"] .announcement-badge {
+  background: rgba(59, 130, 246, 0.25);
+  color: #93c5fd;
 }
 
-[data-theme="dark"] .quiz-matched-reason {
+[data-theme="dark"] .announcement-link {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .announcement-link:hover {
+  color: #f8fafc;
+}
+
+/* Navigation & Header */
+[data-theme="dark"] .logo-icon {
+  background: #1e293b;
+  border: 1px solid var(--line);
+}
+
+[data-theme="dark"] .contact-nav {
   background: var(--surface-subtle);
-  border-color: var(--line);
+  color: var(--ink);
+  border-color: var(--line-strong);
 }
 
+[data-theme="dark"] .contact-nav:hover {
+  background: var(--line);
+  color: var(--accent-hover);
+}
+
+/* Hero Spotlight Card */
 [data-theme="dark"] .hero-visual {
   background: linear-gradient(145deg, #161a26 0%, #0f121b 100%);
   border-color: var(--line-strong);
@@ -3253,6 +3280,139 @@ html[lang="km"] .filter-pill {
 
 [data-theme="dark"] .hero-sheen {
   background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.03) 40%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 60%, transparent 80%);
+}
+
+[data-theme="dark"] .hero-image-wrap {
+  background: var(--surface-subtle);
+  border-color: var(--line);
+}
+
+/* Product Cards & Badges */
+[data-theme="dark"] .product-card {
+  border-color: var(--line);
+}
+
+[data-theme="dark"] .product-card:hover {
+  border-color: var(--line-strong);
+}
+
+[data-theme="dark"] .product-art {
+  background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.25) 100%);
+  border-bottom-color: var(--line);
+}
+
+[data-theme="dark"] .product-card:hover .product-art {
+  background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.07) 0%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+[data-theme="dark"] .badge-pill {
+  background: rgba(19, 22, 32, 0.94);
+  border-color: var(--line-strong);
+  color: var(--ink-soft);
+}
+
+[data-theme="dark"] .compare-toggle {
+  background: rgba(19, 22, 32, 0.94);
+  border-color: var(--line-strong);
+  color: var(--muted);
+}
+
+[data-theme="dark"] .compare-toggle:hover {
+  background: var(--surface-subtle);
+  color: var(--ink);
+}
+
+[data-theme="dark"] .card-config-box {
+  background: var(--surface-subtle);
+  border-color: var(--line);
+}
+
+[data-theme="dark"] .product-card:hover .card-config-box {
+  background: var(--surface-subtle);
+  border-color: var(--line-strong);
+}
+
+[data-theme="dark"] .storage-pill-btn {
+  background: var(--surface);
+  color: var(--ink-soft);
+  border-color: var(--line);
+}
+
+[data-theme="dark"] .storage-pill-btn.is-active {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* Quiz in Dark Mode */
+[data-theme="dark"] .quiz-banner {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(19, 22, 32, 0.95) 100%);
+  border-color: var(--line);
+}
+
+[data-theme="dark"] .quiz-match-pill {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme="dark"] .quiz-matched-reason {
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--ink-soft);
+}
+
+/* Modal Dialog & Specs in Dark Mode */
+[data-theme="dark"] dialog {
+  border-color: var(--line-strong);
+}
+
+[data-theme="dark"] .modal-image-container {
+  background: var(--surface-subtle);
+  border-color: var(--line);
+}
+
+[data-theme="dark"] .modal-local-stock-card {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+[data-theme="dark"] .stock-status-banner {
+  color: #34d399;
+}
+
+[data-theme="dark"] .stock-note-small {
+  color: #a7f3d0;
+}
+
+/* Help / Advisor Banner in Dark Mode */
+[data-theme="dark"] .help-banner {
+  background: #111319;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+
+[data-theme="dark"] .help-copy p {
+  color: var(--muted);
+}
+
+[data-theme="dark"] .help-action-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--line);
+}
+
+[data-theme="dark"] .advisor-badge {
+  color: var(--ink);
+}
+
+[data-theme="dark"] .advisor-note {
+  color: var(--muted);
+}
+
+/* Toast Notification in Dark Mode */
+[data-theme="dark"] .toast {
+  background: #1e293b;
+  color: #f8fafc;
+  border: 1px solid var(--line-strong);
 }
 
 .theme-toggle-btn {
@@ -3735,4 +3895,9 @@ html[lang="km"] .filter-pill {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+option {
+  background: var(--surface);
+  color: var(--ink);
 }
