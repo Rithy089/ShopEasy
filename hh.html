@@ -197,6 +197,27 @@
             Big ideas. Beautiful design.<br />One phone that’s right for you.
           </p>
         </div>
+        <!-- Find My Phone Quiz Banner & Interactive Widget -->
+        <div class="quiz-banner reveal-on-scroll" id="quiz-banner">
+          <div class="quiz-banner-content">
+            <div class="quiz-badge-pill">
+              <span class="quiz-sparkle-icon" aria-hidden="true">✨</span>
+              <span data-t="quizBadge">Personalized Match</span>
+            </div>
+            <div class="quiz-banner-text">
+              <h3 data-t="quizBannerTitle">Not sure which 2026 phone fits you?</h3>
+              <p data-t="quizBannerSub">Answer 3 quick questions to find your ideal match in 30 seconds.</p>
+            </div>
+          </div>
+          <button class="button primary-sm quiz-start-btn" id="quiz-toggle-btn" type="button" aria-expanded="false">
+            <span data-t="quizStartBtn">Start 30s Quiz 🎯</span>
+          </button>
+        </div>
+
+        <div class="quiz-card-wrapper" id="quiz-card-wrapper" hidden>
+          <div class="quiz-container" id="quiz-container"></div>
+        </div>
+
         <div class="toolbar">
           <div class="filters" role="group" aria-label="Filter by brand">
             <button

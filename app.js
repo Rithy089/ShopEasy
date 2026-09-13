@@ -231,6 +231,19 @@ const km = {
   sortLabel: "តម្រៀបតាម",
   colorLabel: "ពណ៌",
   storageLabel: "ទំហំផ្ទុក",
+  quizBadge: "ការណែនាំពិសេស",
+  quizBannerTitle: "មិនទាន់ដឹងថាទូរស័ព្ទមួយណាត្រូវនឹងអ្នក?",
+  quizBannerSub: "ឆ្លើយសំណួរងាយៗ ៣ ដើម្បីស្វែងរកទូរស័ព្ទសមស្របបំផុតក្នុងរយៈពេល ៣០ វិនាទី។",
+  quizStartBtn: "ស្វែងរកទូរស័ព្ទខ្ញុំ 🎯",
+  quizCloseBtn: "បិទកម្រងសំណួរ",
+  quizStep: "ជំហាន",
+  quizOf: "នៃ",
+  quizNext: "បន្តទៅមុខ",
+  quizBack: "ត្រឡប់ក្រោយ",
+  quizRetake: "ធ្វើម្តងទៀត",
+  quizViewDetails: "មើលព័ត៌មានលម្អិត",
+  quizInquireMatch: "សួរតម្លៃតាម Telegram",
+  quizMatchLabel: "ត្រូវគ្នា",
 };
 
 const en = {
@@ -254,6 +267,19 @@ const en = {
   sortLabel: "Sort by",
   colorLabel: "Color",
   storageLabel: "Storage",
+  quizBadge: "Personalized Match",
+  quizBannerTitle: "Not sure which 2026 phone fits you?",
+  quizBannerSub: "Answer 3 quick questions to find your ideal match in 30 seconds.",
+  quizStartBtn: "Start 30s Quiz 🎯",
+  quizCloseBtn: "Close Quiz",
+  quizStep: "Step",
+  quizOf: "of",
+  quizNext: "Next",
+  quizBack: "Back",
+  quizRetake: "Retake Quiz",
+  quizViewDetails: "View Details & Options",
+  quizInquireMatch: "Ask Price on Telegram",
+  quizMatchLabel: "Match",
 };
 
 document.querySelectorAll("[data-t]").forEach((el) => {
@@ -980,6 +1006,11 @@ function setLanguage() {
 
   render();
 
+  const quizWrapper = document.getElementById("quiz-card-wrapper");
+  if (quizWrapper && !quizWrapper.hidden && typeof renderQuiz === "function") {
+    renderQuiz();
+  }
+
   try {
     localStorage.setItem("bobbyshop-language", lang);
   } catch {}
@@ -1205,6 +1236,345 @@ if (backTop) {
 updateScroll();
 
 // Motion & Micro-interactions Enhancements
+// --- Find My Phone Quiz Engine ---
+const quizQuestions = [
+  {
+    id: "priority",
+    en: {
+      title: "What is your top priority in a smartphone?",
+      sub: "Choose what matters most in your daily use.",
+      options: [
+        { id: "photo", icon: "📸", title: "Pro Photography & Video", desc: "Highest zoom, ProRes/8K, best low-light camera" },
+        { id: "power", icon: "💼", title: "Productivity & Big Screen", desc: "Multitasking, S Pen notes, biggest canvas" },
+        { id: "design", icon: "🪶", title: "Ultra-Thin & Lightweight", desc: "Breakthrough thin titanium feel in your pocket" },
+        { id: "value", icon: "⚡", title: "Daily Comfort & Reliability", desc: "All-day battery life, smooth speed & great value" },
+      ],
+    },
+    km: {
+      title: "តើអ្វីជាចំណុចសំខាន់បំផុតសម្រាប់អ្នក?",
+      sub: "ជ្រើសរើសអ្វីដែលអ្នកត្រូវការបំផុតក្នុងការប្រើប្រាស់ប្រចាំថ្ងៃ។",
+      options: [
+        { id: "photo", icon: "📸", title: "កាមេរ៉ា និងវីដេអូកម្រិតខ្ពស់", desc: "ហ្ស៊ូមច្បាស់ ថតច្បាស់ពេលយប់ គុណភាពខ្ពស់" },
+        { id: "power", icon: "💼", title: "ការងារ និងថាមពលខ្លាំង", desc: "ប្រើកម្មវិធីច្រើនក្នុងពេលតែមួយ សរសេរជាមួយ S Pen" },
+        { id: "design", icon: "🪶", title: "ស្តើង និងស្រាលពិសេស", desc: "រចនាស្តើងពីទីតានីញ៉ូម ងាយស្រួលកាន់ក្នុងដៃ" },
+        { id: "value", icon: "⚡", title: "ភាពងាយស្រួល និងតម្លៃសមរម្យ", desc: "ថ្មកាន់បានយូរ ល្បឿនលឿន និងតម្លៃល្អ" },
+      ],
+    },
+  },
+  {
+    id: "os",
+    en: {
+      title: "Which ecosystem do you prefer?",
+      sub: "Operating system or brand inclination.",
+      options: [
+        { id: "apple", icon: "🍎", title: "Apple iOS", desc: "Apple ecosystem, clean simplicity, A19 Pro chip" },
+        { id: "samsung", icon: "🌌", title: "Samsung Galaxy AI", desc: "One UI flexibility, Galaxy AI tools, S Pen" },
+        { id: "any", icon: "🤝", title: "Open to Either", desc: "Show me whatever fits my needs best" },
+      ],
+    },
+    km: {
+      title: "តើអ្នកចូលចិត្តប្រព័ន្ធប្រតិបត្តិការមួយណា?",
+      sub: "ជ្រើសរើសម៉ាក ឬប្រព័ន្ធដែលអ្នកធ្លាប់ប្រើ។",
+      options: [
+        { id: "apple", icon: "🍎", title: "Apple iOS", desc: "ប្រព័ន្ធ Apple ងាយស្រួលប្រើ បន្ទះឈីប A19 Pro" },
+        { id: "samsung", icon: "🌌", title: "Samsung Galaxy AI", desc: "មុខងារ AI ទំនើប ប៊ិច S Pen និងអេក្រង់ច្បាស់" },
+        { id: "any", icon: "🤝", title: "មួយណាក៏បាន", desc: "ណែនាំទូរស័ព្ទណាដែលស័ក្តិសមបំផុត" },
+      ],
+    },
+  },
+  {
+    id: "size",
+    en: {
+      title: "What screen size feels best in your hand?",
+      sub: "Pocketability vs immersive entertainment.",
+      options: [
+        { id: "compact", icon: "📱", title: "Comfortably Compact (~6.3 inches)", desc: "Easy one-handed reach, light in pocket" },
+        { id: "large", icon: "🖥️", title: "Large & Immersive (6.7 – 6.9 inches)", desc: "Maximum canvas for media, games & work" },
+        { id: "balanced", icon: "⚖️", title: "Balanced / Medium (~6.5 inches)", desc: "Perfect sweet spot between size and weight" },
+      ],
+    },
+    km: {
+      title: "តើទំហំអេក្រង់ណាដែលអ្នកចូលចិត្ត?",
+      sub: "ងាយស្រួលដាក់ហោប៉ៅ ឬអេក្រង់ធំទូលាយ។",
+      options: [
+        { id: "compact", icon: "📱", title: "ទំហំល្មម (~៦.៣ អ៊ីញ)", desc: "ងាយស្រួលកាន់ដោយដៃម្ខាង ស្រាលហោប៉ៅ" },
+        { id: "large", icon: "🖥️", title: "ទំហំធំ (៦.៧ – ៦.៩ អ៊ីញ)", desc: "មើលវីដេអូ លេងហ្គេម និងធ្វើការងារបានស្រួល" },
+        { id: "balanced", icon: "⚖️", title: "ទំហំកណ្តាល (~៦.៥ អ៊ីញ)", desc: "តុល្យភាពរវាងភាពងាយស្រួល និងទំហំអេក្រង់" },
+      ],
+    },
+  },
+];
+
+const quizState = {
+  isOpen: false,
+  step: 0,
+  answers: {},
+};
+
+function calculateQuizMatch(answers) {
+  if (answers.priority === "design") {
+    return {
+      productId: "air",
+      score: "99%",
+      enReason: "The all-new iPhone Air delivers breakthrough ultra-thin titanium engineering with zero compromise on A19 Pro performance.",
+      kmReason: "iPhone Air ថ្មីផ្តល់នូវការរចនាស្តើងពិសេសពីទីតានីញ៉ូម ស្រាលបំផុតក្នុងដៃ ជាមួយបន្ទះឈីប A19 Pro ខ្លាំងក្លា។",
+    };
+  }
+
+  if (answers.priority === "power" || (answers.os === "samsung" && answers.size === "large")) {
+    return {
+      productId: "ultra",
+      score: "98%",
+      enReason: "Galaxy S26 Ultra is the ultimate powerhouse with built-in S Pen, 200MP camera, and huge 6.9-inch Dynamic AMOLED display.",
+      kmReason: "Galaxy S26 Ultra គឺជាកំពូលទូរស័ព្ទជាមួយប៊ិច S Pen, កាមេរ៉ា 200MP និងអេក្រង់ធំ 6.9 អ៊ីញ។",
+    };
+  }
+
+  if (answers.priority === "photo") {
+    if (answers.os === "samsung") {
+      return {
+        productId: "ultra",
+        score: "97%",
+        enReason: "Galaxy S26 Ultra's 200MP sensor and enhanced AI zoom give you unmatched photographic versatility.",
+        kmReason: "កាមេរ៉ា 200MP និងប្រព័ន្ធ AI Zoom របស់ Galaxy S26 Ultra ផ្តល់នូវរូបភាពច្បាស់ឥតខ្ចោះ។",
+      };
+    }
+    return {
+      productId: "pro",
+      score: "99%",
+      enReason: "iPhone 17 Pro is the gold standard for creative professionals, 48MP Fusion cameras, and ProRes video recording.",
+      kmReason: "iPhone 17 Pro ជាជម្រើសកំពូលសម្រាប់អ្នកច្នៃប្រឌិត ថតរូប និងវីដេអូជាមួយកាមេរ៉ា 48MP Fusion។",
+    };
+  }
+
+  if (answers.size === "large") {
+    return answers.os === "apple"
+      ? {
+          productId: "air",
+          score: "95%",
+          enReason: "At 6.5 inches with titanium lightness, iPhone Air gives you plenty of screen without the pocket bulk.",
+          kmReason: "អេក្រង់ 6.5 អ៊ីញ ស្រាលងាយស្រួលកាន់ ផ្តល់នូវទំហំធំទូលាយដោយមិនធ្ងន់។",
+        }
+      : {
+          productId: "plus",
+          score: "97%",
+          enReason: "Galaxy S26+ gives you a gorgeous 6.7-inch display, massive battery life, and flagship Snapdragon speed at great value.",
+          kmReason: "Galaxy S26+ ផ្តល់នូវអេក្រង់ 6.7 អ៊ីញ ថ្មកាន់បានយូរ និងបន្ទះឈីប Snapdragon 8 Elite ក្នុងតម្លៃសមរម្យ។",
+        };
+  }
+
+  if (answers.os === "samsung") {
+    return {
+      productId: "s26",
+      score: "96%",
+      enReason: "Galaxy S26 gives you complete flagship Galaxy AI power in a comfortable 6.3-inch compact body.",
+      kmReason: "Galaxy S26 ផ្តល់នូវមុខងារ Galaxy AI កម្រិតខ្ពស់ទាំងអស់ ក្នុងទំហំ 6.3 អ៊ីញ ងាយស្រួលកាន់។",
+    };
+  }
+
+  return {
+    productId: "17",
+    score: "98%",
+    enReason: "iPhone 17 is the sweetest all-rounder: vibrant display, durable design, dual 48MP Fusion cameras, and incredible daily speed.",
+    kmReason: "iPhone 17 គឺជាជម្រើសដ៏ល្អឥតខ្ចោះសម្រាប់រាល់ថ្ងៃ៖ អេក្រង់ភ្លឺច្បាស់ កាមេរ៉ា 48MP និងល្បឿនលឿន។",
+  };
+}
+
+function renderQuiz() {
+  const container = document.getElementById("quiz-container");
+  if (!container) return;
+
+  const isKm = lang === "km";
+
+  // Result screen
+  if (quizState.step >= quizQuestions.length) {
+    const match = calculateQuizMatch(quizState.answers);
+    const p = products.find((item) => item.id === match.productId);
+    const cfg = getConfig(p.id);
+    const activeColorName = isKm ? cfg.color.kmName : cfg.color.name;
+    const matchReason = isKm ? match.kmReason : match.enReason;
+
+    const tgInquiryText = encodeURIComponent(
+      isKm
+        ? `សួស្តី BobbyShop! ខ្ញុំបានឆ្លើយកម្រងសំណួរ ហើយទទួលបានការណែនាំ ${p.name} (${match.score}) ពណ៌ ${activeColorName} (${cfg.storage})។ តើមានស្តុក និងតម្លៃក្នុងស្រុកបច្ចុប្បន្នប៉ុន្មានដែរ?`
+        : `Hi BobbyShop! I completed your 30s quiz and matched with the ${p.name} (${match.score} Match) in ${activeColorName} (${cfg.storage}). What is the current local Phnom Penh price and availability?`
+    );
+
+    container.innerHTML = `
+      <div class="quiz-result-view">
+        <div class="quiz-header">
+          <div class="quiz-match-pill">
+            <span>✨</span>
+            <span>${match.score} ${t("quizMatchLabel")}</span>
+          </div>
+          <button class="quiz-close-btn" data-quiz-close aria-label="${t("quizCloseBtn")}">×</button>
+        </div>
+
+        <div class="quiz-result-header">
+          <h3 class="quiz-result-title">${isKm ? "ទូរស័ព្ទដែលស័ក្តិសមបំផុតសម្រាប់អ្នក!" : "Your Ideal 2026 Smartphone Match!"}</h3>
+          <p class="quiz-result-sub">${isKm ? "ផ្អែកលើតម្រូវការប្រើប្រាស់ ប្រព័ន្ធប្រតិបត្តិការ និងទំហំអេក្រង់ដែលអ្នកបានជ្រើសរើស" : "Based on your daily priorities, preferred ecosystem, and screen size."}</p>
+        </div>
+
+        <div class="quiz-card-hero-match">
+          <img src="assets/${p.image}.jpg" alt="${p.name}" class="quiz-matched-img" width="200" height="160" />
+          <div class="quiz-matched-details">
+            <span class="quiz-matched-brand">${p.brand} · 2026 EDITION</span>
+            <h4 class="quiz-matched-name">${p.name}</h4>
+            <div class="quiz-matched-reason">${matchReason}</div>
+            <div class="quiz-matched-specs">
+              <span class="spec-pill">${p.display}</span>
+              <span class="spec-pill">${p.chip}</span>
+              <span class="spec-pill">${p.camera}</span>
+              <span class="spec-pill">${cfg.storage}</span>
+            </div>
+            <div class="quiz-matched-price-row">
+              <span class="quiz-matched-price">${money(cfg.price)}</span>
+              <span class="price-meta">${t("reference")}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-result-actions">
+          <button class="button primary" data-detail="${p.id}">
+            <span>${t("quizViewDetails")}</span>
+            <span class="arrow-icon" aria-hidden="true">↗</span>
+          </button>
+          <a
+            class="button telegram-btn"
+            href="https://t.me/Bobbyplzy?text=${tgInquiryText}"
+            target="_blank"
+            rel="noopener"
+          >
+            <span>${t("quizInquireMatch")}</span>
+            <span class="arrow-icon" aria-hidden="true">↗</span>
+          </a>
+          <button class="button secondary" data-quiz-retake>
+            <span>↺ ${t("quizRetake")}</span>
+          </button>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  // Question step
+  const q = quizQuestions[quizState.step];
+  const qData = isKm ? q.km : q.en;
+  const progressPct = ((quizState.step + 1) / quizQuestions.length) * 100;
+  const currentAnswer = quizState.answers[q.id];
+
+  container.innerHTML = `
+    <div class="quiz-step-view">
+      <div class="quiz-header">
+        <div class="quiz-progress-track">
+          <div class="quiz-progress-bar-bg">
+            <div class="quiz-progress-bar-fill" style="width: ${progressPct}%;"></div>
+          </div>
+          <span class="quiz-step-count">${t("quizStep")} ${quizState.step + 1} ${t("quizOf")} ${quizQuestions.length}</span>
+        </div>
+        <button class="quiz-close-btn" data-quiz-close aria-label="${t("quizCloseBtn")}">×</button>
+      </div>
+
+      <h3 class="quiz-question-title">${qData.title}</h3>
+      <p class="quiz-question-sub">${qData.sub}</p>
+
+      <div class="quiz-options-grid" role="radiogroup" aria-label="${qData.title}">
+        ${qData.options
+          .map(
+            (opt) => `
+          <button
+            type="button"
+            class="quiz-option-card ${currentAnswer === opt.id ? "is-selected" : ""}"
+            data-quiz-option="${opt.id}"
+            aria-checked="${currentAnswer === opt.id}"
+          >
+            <span class="quiz-option-icon" aria-hidden="true">${opt.icon}</span>
+            <div class="quiz-option-info">
+              <strong class="quiz-option-title">${opt.title}</strong>
+              <span class="quiz-option-desc">${opt.desc}</span>
+            </div>
+          </button>
+        `
+          )
+          .join("")}
+      </div>
+
+      <div class="quiz-nav-row">
+        ${
+          quizState.step > 0
+            ? `<button type="button" class="button outline-sm" data-quiz-back>← ${t("quizBack")}</button>`
+            : `<div></div>`
+        }
+        <button
+          type="button"
+          class="button secondary"
+          data-quiz-close
+        >
+          ${t("quizCloseBtn")}
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function initQuiz() {
+  const toggleBtn = document.getElementById("quiz-toggle-btn");
+  const wrapper = document.getElementById("quiz-card-wrapper");
+  if (!toggleBtn || !wrapper) return;
+
+  toggleBtn.addEventListener("click", () => {
+    const isHidden = wrapper.hidden;
+    wrapper.hidden = !isHidden;
+    toggleBtn.setAttribute("aria-expanded", String(isHidden));
+    if (isHidden) {
+      renderQuiz();
+      wrapper.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    // Option clicked
+    const optBtn = e.target.closest("[data-quiz-option]");
+    if (optBtn) {
+      const q = quizQuestions[quizState.step];
+      quizState.answers[q.id] = optBtn.dataset.quizOption;
+      // Smooth advance to next step
+      setTimeout(() => {
+        quizState.step++;
+        renderQuiz();
+      }, 150);
+      return;
+    }
+
+    // Back clicked
+    const backBtn = e.target.closest("[data-quiz-back]");
+    if (backBtn) {
+      if (quizState.step > 0) {
+        quizState.step--;
+        renderQuiz();
+      }
+      return;
+    }
+
+    // Retake clicked
+    const retakeBtn = e.target.closest("[data-quiz-retake]");
+    if (retakeBtn) {
+      quizState.step = 0;
+      quizState.answers = {};
+      renderQuiz();
+      return;
+    }
+
+    // Close clicked
+    const closeBtn = e.target.closest("[data-quiz-close]");
+    if (closeBtn) {
+      wrapper.hidden = true;
+      toggleBtn.setAttribute("aria-expanded", "false");
+      return;
+    }
+  });
+}
+
 function setupScrollReveal() {
   const revealElements = document.querySelectorAll(".reveal-on-scroll");
   if (!revealElements.length) return;
@@ -1289,3 +1659,5 @@ function setupProductCardsTilt() {
 setupScrollReveal();
 setupHeroCardTilt();
 setupProductCardsTilt();
+
+initQuiz();
