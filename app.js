@@ -1,3 +1,38 @@
+// --- Theme Management (OLED Dark Mode / Light Mode) ---
+let currentTheme = "light";
+try {
+  currentTheme = localStorage.getItem("bobbyshop-theme") ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+} catch {}
+
+function applyTheme(th) {
+  currentTheme = th;
+  if (th === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+  }
+  try {
+    localStorage.setItem("bobbyshop-theme", th);
+  } catch {}
+
+  const themeIcon = document.getElementById("theme-icon");
+  const themeBtn = document.getElementById("theme-toggle");
+  if (themeIcon) {
+    themeIcon.textContent = th === "dark" ? "☀️" : "🌙";
+  }
+  if (themeBtn) {
+    themeBtn.setAttribute(
+      "aria-label",
+      th === "dark" ? "Switch to light mode" : "Switch to dark mode"
+    );
+    themeBtn.setAttribute(
+      "title",
+      th === "dark" ? "Switch to light mode" : "Switch to dark mode"
+    );
+  }
+}
+
 const samsungSource =
   "https://news.samsung.com/us/samsung-unveils-galaxy-s26-series-most-intuitive-galaxy-ai-phone-yet";
 
@@ -1073,6 +1108,15 @@ document.getElementById("language").addEventListener("click", () => {
   lang = lang === "en" ? "km" : "en";
   setLanguage();
 });
+
+applyTheme(currentTheme);
+
+const themeToggleBtn = document.getElementById("theme-toggle");
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", () => {
+    applyTheme(currentTheme === "dark" ? "light" : "dark");
+  });
+}
 
 const currToggleBtn = document.getElementById("currency-toggle");
 if (currToggleBtn) {
