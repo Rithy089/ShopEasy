@@ -324,12 +324,65 @@ let currentModal = null;
 
 const t = (key) => (lang === "km" ? km[key] : en[key]) || en[key] || key;
 
-const money = (n) =>
-  new Intl.NumberFormat("en-US", {
+const EXCHANGE_RATE_KHR = 4100;
+let currency = "USD";
+try {
+  currency = localStorage.getItem("bobbyshop-currency") || "USD";
+} catch {}
+
+const money = (n) => {
+  if (currency === "KHR") {
+    const khr = Math.round(n * EXCHANGE_RATE_KHR);
+    return new Intl.NumberFormat("en-US").format(khr) + " ៛";
+  }
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: n % 1 ? 2 : 0,
   }).format(n);
+};
+
+function updateCurrencyUI() {
+  const btn = document.getElementById("currency-toggle");
+  if (btn) {
+    if (currency === "KHR") {
+      btn.innerHTML = '<span class="currency-symbol">៛</span> <span class="currency-code">KHR</span>';
+      btn.setAttribute("aria-label", "Switch to USD");
+      btn.setAttribute("title", "Exchange Rate: $1 ≈ 4,100 KHR");
+    } else {
+      btn.innerHTML = '<span class="currency-symbol">$</span> <span class="currency-code">USD</span>';
+      btn.setAttribute("aria-label", "Switch to Khmer Riel (KHR)");
+      btn.setAttribute("title", "Exchange Rate: $1 ≈ 4,100 KHR");
+    }
+  }
+}
+
+function setCurrency(newCurr) {
+  currency = newCurr;
+  try {
+    localStorage.setItem("bobbyshop-currency", currency);
+  } catch {}
+  updateCurrencyUI();
+  render();
+
+  if (currentModal && currentModal !== "compare") {
+    const cfg = getConfig(currentModal);
+    const modalPrice = document.getElementById(`modal-price-val-${currentModal}`);
+    if (modalPrice) {
+      modalPrice.textContent = money(cfg.price);
+      modalPrice.classList.remove("is-bumped");
+      void modalPrice.offsetWidth;
+      modalPrice.classList.add("is-bumped");
+    }
+  } else if (currentModal === "compare") {
+    compare();
+  }
+
+  const quizWrapper = document.getElementById("quiz-card-wrapper");
+  if (quizWrapper && !quizWrapper.hidden && typeof quizState !== "undefined" && quizState.step >= 3) {
+    renderQuiz();
+  }
+}
 
 const badgeTranslations = {
   "The pro pick": { en: "The pro pick", km: "ជម្រើសកម្រិតខ្ពស់" },
@@ -1021,6 +1074,13 @@ document.getElementById("language").addEventListener("click", () => {
   setLanguage();
 });
 
+const currToggleBtn = document.getElementById("currency-toggle");
+if (currToggleBtn) {
+  currToggleBtn.addEventListener("click", () => {
+    setCurrency(currency === "USD" ? "KHR" : "USD");
+  });
+}
+
 document.querySelectorAll("[data-brand]").forEach((button) =>
   button.addEventListener("click", () => {
     brand = button.dataset.brand;
@@ -1196,6 +1256,7 @@ modal.addEventListener("close", () => {
 });
 
 setLanguage();
+updateCurrencyUI();
 
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const backTop = document.getElementById("back-top");
