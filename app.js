@@ -86,7 +86,7 @@ const products = [
     image: "plus",
     badge: "More room to play",
     desc: "More space for everything you love to do.",
-    km: "ទំហំធំជាងមុនសម្រាប់អ្វីគ្រប់យ៉ាងដែលអ្នកចូលចិត្ត។",
+    km: "ទំហំធំជាងមុនសម្រាប់អ្វីៗគ្រប់យ៉ាងដែលអ្នកចូលចិត្ត។",
     display: "6.7-inch",
     chip: "Snapdragon 8 Elite Gen 5",
     camera: "50MP wide",
@@ -118,7 +118,7 @@ const km = {
   benefit3Desc: "ជជែកផ្ទាល់ជាមួយ Bobby សម្រាប់ស្តុក និងតម្លៃ",
   lineup: "ជម្រើសទូរស័ព្ទ",
   find: "ស្វែងរកទូរស័ព្ទដែលអ្នកពេញចិត្ត។",
-  catalogText: "គំនិតថ្មី។ រចនាស្អាត។<br>ទូរស័ព្ទសមស្របសម្រាប់អ្នក។",
+  catalogText: "គំនិតថ្មីៗ។ រចនាស្អាត។<br>ទូរស័ព្ទសមស្របសម្រាប់អ្នក។",
   all: "ទាំងអស់",
   featured: "ជម្រើសណែនាំ",
   priceLow: "តម្លៃ៖ ទាបទៅខ្ពស់",
@@ -126,7 +126,7 @@ const km = {
   nameSort: "ឈ្មោះ៖ A–Z",
   compareHint: "ជ្រើសរើសរហូតដល់ ៣ ដើម្បីប្រៀបធៀប",
   emptyTitle: "រកមិនឃើញទូរស័ព្ទ។",
-  emptyText: "សាកល្បងឈ្មោះ បន្ទះឈីប ឬម៉ាកផ្សេង។",
+  emptyText: "សាកល្បងឈ្មោះ បន្ទះឈីប ឬម៉ាកផ្សេងៗ។",
   reset: "កំណត់តម្រងឡើងវិញ",
   priceNote:
     "តម្លៃជាដុល្លារអាមេរិក គឺជាតម្លៃចាប់ផ្តើមពេលចេញលក់នៅអាមេរិក មិនរួមពន្ធ។ តម្លៃក្នុងស្រុក ជម្រើស និងស្តុកអាចខុសគ្នា។ សូមទាក់ទងយើងសម្រាប់តម្លៃបច្ចុប្បន្ន។",
@@ -844,3 +844,89 @@ if (backTop) {
 }
 
 updateScroll();
+
+// Motion & Micro-interactions Enhancements
+function setupScrollReveal() {
+  const revealElements = document.querySelectorAll(".reveal-on-scroll");
+  if (!revealElements.length) return;
+
+  if (motionPreference.matches || !("IntersectionObserver" in window)) {
+    revealElements.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  revealElements.forEach((el) => observer.observe(el));
+}
+
+function setupHeroCardTilt() {
+  const heroCard = document.getElementById("hero-visual-card") || document.querySelector(".hero-visual");
+  if (!heroCard || motionPreference.matches) return;
+
+  heroCard.addEventListener("mousemove", (e) => {
+    const rect = heroCard.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    heroCard.style.setProperty("--hero-mouse-x", `${x}px`);
+    heroCard.style.setProperty("--hero-mouse-y", `${y}px`);
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -5;
+    const rotateY = ((x - centerX) / centerX) * 6;
+
+    heroCard.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+  });
+
+  heroCard.addEventListener("mouseleave", () => {
+    heroCard.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)";
+  });
+}
+
+function setupProductCardsTilt() {
+  if (motionPreference.matches) return;
+
+  grid.addEventListener("mousemove", (e) => {
+    const card = e.target.closest(".product-card");
+    if (!card) return;
+
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -4;
+    const rotateY = ((x - centerX) / centerX) * 4;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-8px)`;
+  });
+
+  grid.addEventListener("mouseout", (e) => {
+    const card = e.target.closest(".product-card");
+    if (!card) return;
+    const related = e.relatedTarget;
+    if (related && card.contains(related)) return;
+
+    card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)";
+  });
+}
+
+setupScrollReveal();
+setupHeroCardTilt();
+setupProductCardsTilt();

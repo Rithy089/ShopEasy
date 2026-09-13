@@ -82,6 +82,8 @@
     </header>
     <main>
       <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
         <div class="hero-copy">
           <div class="eyebrow">
             <span class="status-dot"></span>
@@ -97,11 +99,11 @@
           <div class="hero-actions">
             <a class="button primary" href="#products">
               <span data-t="explore">Explore the collection</span>
-              <span aria-hidden="true">↓</span>
+              <span class="arrow-down-anim" aria-hidden="true">↓</span>
             </a>
             <a class="button secondary" href="https://t.me/Bobbyplzy" target="_blank" rel="noopener">
               <span data-t="chatShort">Chat on Telegram</span>
-              <span aria-hidden="true">↗</span>
+              <span class="arrow-ext" aria-hidden="true">↗</span>
             </a>
           </div>
           <div class="hero-note">
@@ -109,7 +111,8 @@
             <span data-t="local">Your local connection to better tech.<br />Phnom Penh, Cambodia.</span>
           </div>
         </div>
-        <div class="hero-visual">
+        <div class="hero-visual" id="hero-visual-card">
+          <div class="hero-sheen" aria-hidden="true"></div>
           <div class="hero-label">
             <span class="hero-badge">SPOTLIGHT</span>
             <span class="hero-edition">01 / 2026 EDIT</span>
@@ -141,14 +144,14 @@
               data-detail="pro"
               aria-label="Explore iPhone 17 Pro"
             >
-              <span data-t="details">View details</span> ↗
+              <span data-t="details">View details</span> <span class="arrow-icon" aria-hidden="true">↗</span>
             </button>
           </div>
         </div>
       </section>
 
       <!-- Store Credibility Benefits Strip -->
-      <section class="benefits-strip" aria-label="Why BobbyShop">
+      <section class="benefits-strip reveal-on-scroll" aria-label="Why BobbyShop">
         <div class="benefit-item">
           <div class="benefit-icon" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -185,7 +188,7 @@
         </div>
       </section>
       <section id="products" class="catalog" aria-labelledby="catalog-title">
-        <div class="section-top">
+        <div class="section-top reveal-on-scroll">
           <div>
             <div class="eyebrow" data-t="lineup">THE LINEUP</div>
             <h2 id="catalog-title" data-t="find">Find your next favorite.</h2>
@@ -287,7 +290,7 @@
           </p>
         </div>
       </section>
-      <section class="help-banner" id="about">
+      <section class="help-banner reveal-on-scroll" id="about">
         <div class="help-copy">
           <div class="eyebrow-light" data-t="human">A LITTLE HUMAN HELP</div>
           <h2 data-t="helpTitle">
@@ -322,7 +325,7 @@
           </div>
         </div>
       </section>
-      <section id="contact" class="contact-section">
+      <section id="contact" class="contact-section reveal-on-scroll">
         <div class="contact-brand">
           <a class="logo logo-footer" href="#">
             <span class="logo-icon" aria-hidden="true">
