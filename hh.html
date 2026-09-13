@@ -7,7 +7,19 @@
       name="description"
       content="Explore BobbyShop’s 2026 smartphone collection. Compare iPhone and Samsung Galaxy models and ask our Phnom Penh team for local pricing and availability."
     />
-    <meta name="theme-color" content="#f8faff" />
+    <meta name="theme-color" id="meta-theme-color" content="#f8faff" />
+    <script>
+      (function () {
+        try {
+          var t =
+            localStorage.getItem("bobbyshop-theme") ||
+            (window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
     <title>BobbyShop — Your next upgrade, made easy.</title>
     <link rel="icon" type="image/svg+xml" href="assets/bobbyshop-mark.svg" />
     <link
@@ -17,8 +29,8 @@
       type="font/ttf"
       crossorigin
     />
-    <link rel="stylesheet" href="styles.css?v=2026-fix2" />
-    <script src="app.js?v=2026-fix2" defer></script>
+    <link rel="stylesheet" href="styles.css?v=2026-fix3" />
+    <script src="app.js?v=2026-fix3" defer></script>
   </head>
   <body>
     <a class="skip" href="#products">Skip to phones</a>

@@ -311,7 +311,7 @@ header {
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid rgba(226, 232, 240, 0.9);
-  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 header.is-scrolled {
@@ -340,7 +340,12 @@ header.is-scrolled {
   letter-spacing: -0.6px;
   color: var(--ink);
   white-space: nowrap;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: color var(--transition-fast), transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo-text {
+  color: inherit;
+  transition: color var(--transition-fast);
 }
 
 .logo-icon {
@@ -352,7 +357,7 @@ header.is-scrolled {
   background: #0f172a;
   border-radius: var(--radius-sm);
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
 }
 
 .logo:hover .logo-icon {
@@ -361,7 +366,7 @@ header.is-scrolled {
 }
 
 .logo-dot {
-  color: var(--accent);
+  color: var(--accent) !important;
   display: inline-block;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -3255,30 +3260,80 @@ html[lang="km"] .filter-pill {
   color: #f8fafc;
 }
 
-/* Navigation & Header */
+/* Navigation & Header — Dark & Light Synchronization */
 [data-theme="dark"] header,
 header.dark-theme {
-  background-color: rgba(9, 10, 15, 0.92);
-  border-bottom-color: var(--line);
+  background-color: rgba(9, 10, 15, 0.92) !important;
+  border-bottom-color: var(--line) !important;
 }
 
 [data-theme="dark"] header.is-scrolled,
 header.dark-theme.is-scrolled {
-  background-color: rgba(17, 19, 25, 0.98);
-  border-bottom-color: var(--line-strong);
+  background-color: rgba(17, 19, 25, 0.98) !important;
+  border-bottom-color: var(--line-strong) !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
 
-.logo,
-.logo-text {
-  color: var(--ink);
+[data-theme="light"] header,
+html:not([data-theme="dark"]) header:not(.dark-theme) {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-bottom-color: rgba(226, 232, 240, 0.9);
 }
 
+[data-theme="light"] header.is-scrolled,
+html:not([data-theme="dark"]) header:not(.dark-theme).is-scrolled {
+  background-color: rgba(255, 255, 255, 0.96);
+  border-bottom-color: var(--line-strong);
+}
+
+/* Base and Light Mode Logo / Website Name Styling */
+.logo,
+.logo:link,
+.logo:visited,
+.logo:hover,
+.logo:active,
+.logo-text,
+[data-theme="light"] .logo,
+[data-theme="light"] .logo:link,
+[data-theme="light"] .logo:visited,
+[data-theme="light"] .logo-text,
+html:not([data-theme="dark"]) .logo,
+html:not([data-theme="dark"]) .logo:link,
+html:not([data-theme="dark"]) .logo:visited,
+html:not([data-theme="dark"]) .logo-text,
+header:not(.dark-theme) .logo,
+header:not(.dark-theme) .logo:link,
+header:not(.dark-theme) .logo:visited,
+header:not(.dark-theme) .logo-text {
+  color: #0f172a !important;
+}
+
+/* Dark Mode Logo / Website Name Styling */
 [data-theme="dark"] .logo,
+[data-theme="dark"] .logo:link,
+[data-theme="dark"] .logo:visited,
+[data-theme="dark"] .logo:hover,
+[data-theme="dark"] .logo:active,
 [data-theme="dark"] .logo-text,
 header.dark-theme .logo,
+header.dark-theme .logo:link,
+header.dark-theme .logo:visited,
+header.dark-theme .logo:hover,
+header.dark-theme .logo:active,
 header.dark-theme .logo-text {
   color: #f8fafc !important;
+}
+
+[data-theme="dark"] .logo-icon,
+header.dark-theme .logo-icon {
+  background: #1e293b !important;
+  border: 1px solid var(--line) !important;
+}
+
+[data-theme="light"] .logo-icon,
+html:not([data-theme="dark"]) header:not(.dark-theme) .logo-icon {
+  background: #0f172a !important;
+  border: 1px solid transparent !important;
 }
 
 [data-theme="dark"] .nav-link {
@@ -3287,11 +3342,6 @@ header.dark-theme .logo-text {
 
 [data-theme="dark"] .nav-link:hover {
   color: #f8fafc;
-}
-
-[data-theme="dark"] .logo-icon {
-  background: #1e293b;
-  border: 1px solid var(--line);
 }
 
 [data-theme="dark"] .contact-nav {

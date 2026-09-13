@@ -24,22 +24,35 @@ let activeTradeIn = { modelId: "none", conditionId: "flawless" };
 // --- Theme Management (OLED Dark Mode / Light Mode) ---
 let currentTheme = "light";
 try {
-  currentTheme = localStorage.getItem("bobbyshop-theme") ||
-    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  currentTheme =
+    localStorage.getItem("bobbyshop-theme") ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light");
 } catch {}
 
 function applyTheme(th) {
   currentTheme = th;
-  const header = document.getElementById("main-header");
-  if (th === "dark") {
-    document.documentElement.setAttribute("data-theme", "dark");
-    document.body?.setAttribute("data-theme", "dark");
-    if (header) header.classList.add("dark-theme");
-  } else {
-    document.documentElement.removeAttribute("data-theme");
-    document.body?.removeAttribute("data-theme");
-    if (header) header.classList.remove("dark-theme");
+  document.documentElement.setAttribute("data-theme", th);
+  if (document.body) {
+    document.body.setAttribute("data-theme", th);
   }
+  const header = document.getElementById("main-header");
+  if (header) {
+    if (th === "dark") {
+      header.classList.add("dark-theme");
+    } else {
+      header.classList.remove("dark-theme");
+    }
+  }
+
+  const metaTheme =
+    document.getElementById("meta-theme-color") ||
+    document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) {
+    metaTheme.setAttribute("content", th === "dark" ? "#090a0f" : "#f8faff");
+  }
+
   try {
     localStorage.setItem("bobbyshop-theme", th);
   } catch {}
@@ -60,6 +73,19 @@ function applyTheme(th) {
     );
   }
 }
+
+// Apply theme immediately upon script loading
+applyTheme(currentTheme);
+
+try {
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (!localStorage.getItem("bobbyshop-theme")) {
+        applyTheme(e.matches ? "dark" : "light");
+      }
+    });
+} catch {}
 
 const samsungSource =
   "https://news.samsung.com/us/samsung-unveils-galaxy-s26-series-most-intuitive-galaxy-ai-phone-yet";
@@ -1212,7 +1238,8 @@ document.getElementById("language").addEventListener("click", () => {
 applyTheme(currentTheme);
 
 const themeToggleBtn = document.getElementById("theme-toggle");
-if (themeToggleBtn) {
+if (themeToggleBtn && !themeToggleBtn.dataset.bound) {
+  themeToggleBtn.dataset.bound = "true";
   themeToggleBtn.addEventListener("click", () => {
     applyTheme(currentTheme === "dark" ? "light" : "dark");
   });
