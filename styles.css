@@ -307,17 +307,17 @@ header {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(255, 255, 255, 0.82);
+  background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid rgba(226, 232, 240, 0.9);
-  transition: box-shadow var(--transition-base), border-color var(--transition-base), background var(--transition-base);
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 
 header.is-scrolled {
   box-shadow: var(--shadow-md);
   border-bottom-color: var(--line-strong);
-  background: rgba(255, 255, 255, 0.96);
+  background-color: rgba(255, 255, 255, 0.96);
 }
 
 .header-inner {
@@ -3256,6 +3256,39 @@ html[lang="km"] .filter-pill {
 }
 
 /* Navigation & Header */
+[data-theme="dark"] header,
+header.dark-theme {
+  background-color: rgba(9, 10, 15, 0.92);
+  border-bottom-color: var(--line);
+}
+
+[data-theme="dark"] header.is-scrolled,
+header.dark-theme.is-scrolled {
+  background-color: rgba(17, 19, 25, 0.98);
+  border-bottom-color: var(--line-strong);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.logo,
+.logo-text {
+  color: var(--ink);
+}
+
+[data-theme="dark"] .logo,
+[data-theme="dark"] .logo-text,
+header.dark-theme .logo,
+header.dark-theme .logo-text {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .nav-link {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .nav-link:hover {
+  color: #f8fafc;
+}
+
 [data-theme="dark"] .logo-icon {
   background: #1e293b;
   border: 1px solid var(--line);

@@ -30,10 +30,15 @@ try {
 
 function applyTheme(th) {
   currentTheme = th;
+  const header = document.getElementById("main-header");
   if (th === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");
+    document.body?.setAttribute("data-theme", "dark");
+    if (header) header.classList.add("dark-theme");
   } else {
     document.documentElement.removeAttribute("data-theme");
+    document.body?.removeAttribute("data-theme");
+    if (header) header.classList.remove("dark-theme");
   }
   try {
     localStorage.setItem("bobbyshop-theme", th);
