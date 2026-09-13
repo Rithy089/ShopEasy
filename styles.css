@@ -2601,6 +2601,197 @@ html[lang="km"] .filter-pill {
   font-family: Battambang, sans-serif;
 }
 
+/* Interactive Color Swatches & Storage Selector */
+.card-config-box {
+  background: var(--surface-subtle);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.product-card:hover .card-config-box {
+  border-color: var(--line-strong);
+  background: #f8fafc;
+}
+
+.config-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.config-label-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.active-color-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink);
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.color-swatches-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.color-swatch-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--swatch-color);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, outline 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.color-swatch-dot:hover {
+  transform: scale(1.2);
+}
+
+.color-swatch-dot.is-active {
+  transform: scale(1.24);
+  outline: 2px solid var(--accent);
+  outline-offset: 2.5px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+}
+
+.storage-selector-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.storage-pill-btn {
+  height: 26px;
+  padding: 0 9px;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.storage-pill-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent-subtle);
+  transform: translateY(-1px);
+}
+
+.storage-pill-btn.is-active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+/* Price Bump Animation on Storage Switch */
+@keyframes price-bump {
+  0% {
+    transform: scale(1);
+    color: var(--accent);
+  }
+  40% {
+    transform: scale(1.12);
+    color: var(--accent-hover);
+  }
+  100% {
+    transform: scale(1);
+    color: var(--ink);
+  }
+}
+
+.price-amount.is-bumped {
+  animation: price-bump 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Modal Config Box */
+.modal-config-box {
+  background: var(--surface-subtle);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-config-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.modal-config-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+}
+
+.modal-active-color {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.modal-swatches-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.modal-swatches-row .color-swatch-dot {
+  width: 26px;
+  height: 26px;
+}
+
+.modal-storage-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.modal-storage-row .storage-pill-btn {
+  height: 32px;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
 /* Responsive Breakpoints */
 
 /* Tablet (768px - 1024px) */

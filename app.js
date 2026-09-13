@@ -1,5 +1,6 @@
 const samsungSource =
   "https://news.samsung.com/us/samsung-unveils-galaxy-s26-series-most-intuitive-galaxy-ai-phone-yet";
+
 const products = [
   {
     id: "pro",
@@ -14,6 +15,17 @@ const products = [
     chip: "A19 Pro",
     camera: "48MP Fusion",
     storage: "256GB",
+    colors: [
+      { name: "Cosmic Orange", kmName: "ទឹកក្រូច Cosmic", hex: "#D85C27" },
+      { name: "Deep Blue", kmName: "ខៀវចាស់ Deep Blue", hex: "#1F3554" },
+      { name: "Natural Titanium", kmName: "ទីតានីញ៉ូមធម្មជាតិ", hex: "#99948D" },
+      { name: "Space Black", kmName: "ខ្មៅ Space Black", hex: "#242527" },
+    ],
+    storageTiers: [
+      { size: "256GB", price: 1099 },
+      { size: "512GB", price: 1299 },
+      { size: "1TB", price: 1499 },
+    ],
     source:
       "https://www.apple.com/newsroom/2025/09/apple-unveils-iphone-17-pro-and-iphone-17-pro-max/",
   },
@@ -30,6 +42,17 @@ const products = [
     chip: "Snapdragon 8 Elite Gen 5",
     camera: "200MP wide",
     storage: "256GB",
+    colors: [
+      { name: "Titanium Cobalt", kmName: "ខៀវ Cobalt", hex: "#283C56" },
+      { name: "Titanium Silver", kmName: "ប្រាក់ Silver", hex: "#D3D8E0" },
+      { name: "Titanium Emerald", kmName: "បៃតង Emerald", hex: "#2C5343" },
+      { name: "Titanium Black", kmName: "ខ្មៅ Titanium Black", hex: "#202123" },
+    ],
+    storageTiers: [
+      { size: "256GB", price: 1299.99 },
+      { size: "512GB", price: 1419.99 },
+      { size: "1TB", price: 1659.99 },
+    ],
     source: samsungSource,
   },
   {
@@ -45,6 +68,17 @@ const products = [
     chip: "A19",
     camera: "48MP Fusion",
     storage: "256GB",
+    colors: [
+      { name: "Ultramarine", kmName: "ខៀវ Ultramarine", hex: "#2E569C" },
+      { name: "Teal", kmName: "បៃតង Teal", hex: "#418B8D" },
+      { name: "Pink", kmName: "ផ្កាឈូក Pink", hex: "#EAA0AB" },
+      { name: "White", kmName: "ស White", hex: "#F4F5F7", border: "#cbd5e1" },
+      { name: "Black", kmName: "ខ្មៅ Black", hex: "#242426" },
+    ],
+    storageTiers: [
+      { size: "256GB", price: 799 },
+      { size: "512GB", price: 999 },
+    ],
     source: "https://www.apple.com/newsroom/2025/09/apple-debuts-iphone-17/",
   },
   {
@@ -60,6 +94,16 @@ const products = [
     chip: "Snapdragon 8 Elite Gen 5",
     camera: "50MP wide",
     storage: "256GB",
+    colors: [
+      { name: "Icy Blue", kmName: "ខៀវស្រាល Icy Blue", hex: "#A5C3DC" },
+      { name: "Silver Shadow", kmName: "ប្រាក់ Silver Shadow", hex: "#CACDCE" },
+      { name: "Mint", kmName: "បៃតងខ្ចី Mint", hex: "#B9DCBF" },
+      { name: "Onyx Black", kmName: "ខ្មៅ Onyx Black", hex: "#272729" },
+    ],
+    storageTiers: [
+      { size: "256GB", price: 899.99 },
+      { size: "512GB", price: 999.99 },
+    ],
     source: samsungSource,
   },
   {
@@ -75,6 +119,17 @@ const products = [
     chip: "A19 Pro",
     camera: "48MP Fusion",
     storage: "256GB",
+    colors: [
+      { name: "Cloud Silver", kmName: "ប្រាក់ Cloud Silver", hex: "#E6E8EC", border: "#cbd5e1" },
+      { name: "Space Black", kmName: "ខ្មៅ Space Black", hex: "#222325" },
+      { name: "Sky Blue", kmName: "ផ្ទៃមេឃ Sky Blue", hex: "#99BDDF" },
+      { name: "Light Gold", kmName: "ទឹកមាស Light Gold", hex: "#EADABF" },
+    ],
+    storageTiers: [
+      { size: "256GB", price: 999 },
+      { size: "512GB", price: 1199 },
+      { size: "1TB", price: 1399 },
+    ],
     source:
       "https://www.apple.com/newsroom/2025/09/introducing-iphone-air-a-powerful-new-iphone-with-a-breakthrough-design/",
   },
@@ -91,9 +146,20 @@ const products = [
     chip: "Snapdragon 8 Elite Gen 5",
     camera: "50MP wide",
     storage: "256GB",
+    colors: [
+      { name: "Cobalt Violet", kmName: "ស្វាយ Cobalt Violet", hex: "#4F4D6B" },
+      { name: "Amber Yellow", kmName: "លឿង Amber Yellow", hex: "#DEC78E" },
+      { name: "Onyx Black", kmName: "ខ្មៅ Onyx Black", hex: "#27282B" },
+      { name: "Marble Gray", kmName: "ប្រផេះ Marble Gray", hex: "#D9DADB" },
+    ],
+    storageTiers: [
+      { size: "256GB", price: 1099.99 },
+      { size: "512GB", price: 1219.99 },
+    ],
     source: samsungSource,
   },
 ];
+
 const km = {
   searchLabel: "ស្វែងរក",
   availability: "សូមទាក់ទងដើម្បីបញ្ជាក់ស្តុក",
@@ -163,6 +229,8 @@ const km = {
   genuineNotice: "ឧបករណ៍សុទ្ធ និងការធានាផ្លូវការពីរោងចក្រ",
   directInquiry: "ផ្ញើសារសួរតម្លៃភ្លាមៗ",
   sortLabel: "តម្រៀបតាម",
+  colorLabel: "ពណ៌",
+  storageLabel: "ទំហំផ្ទុក",
 };
 
 const en = {
@@ -184,11 +252,14 @@ const en = {
   genuineNotice: "Authentic hardware with original factory packaging",
   directInquiry: "Instant Telegram quote",
   sortLabel: "Sort by",
+  colorLabel: "Color",
+  storageLabel: "Storage",
 };
 
 document.querySelectorAll("[data-t]").forEach((el) => {
   en[el.dataset.t] = el.innerHTML;
 });
+
 let lang = "en";
 try {
   lang =
@@ -197,19 +268,43 @@ try {
       ? "km"
       : "en";
 } catch {}
+
 let brand = "All";
 const selected = new Set();
+const userConfig = {};
+
+function getConfig(id) {
+  const p = products.find((item) => item.id === id);
+  if (!p) return null;
+  if (!userConfig[id]) {
+    userConfig[id] = { colorIndex: 0, storageIndex: 0 };
+  }
+  const color = p.colors[userConfig[id].colorIndex] || p.colors[0];
+  const tier = p.storageTiers[userConfig[id].storageIndex] || p.storageTiers[0];
+  return {
+    colorIndex: userConfig[id].colorIndex,
+    storageIndex: userConfig[id].storageIndex,
+    color,
+    tier,
+    price: tier.price,
+    storage: tier.size,
+  };
+}
+
 const grid = document.getElementById("products-container");
 const modal = document.getElementById("product-modal");
 let lastFocus;
 let currentModal = null;
+
 const t = (key) => (lang === "km" ? km[key] : en[key]) || en[key] || key;
+
 const money = (n) =>
   new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: n % 1 ? 2 : 0,
   }).format(n);
+
 const badgeTranslations = {
   "The pro pick": { en: "The pro pick", km: "ជម្រើសកម្រិតខ្ពស់" },
   "2026 flagship": { en: "2026 flagship", km: "កំពូលទូរស័ព្ទ ២០២៦" },
@@ -303,8 +398,11 @@ function render() {
 
   grid.innerHTML = list
     .map((p, i) => {
+      const cfg = getConfig(p.id);
       const isSelected = selected.has(p.id);
       const delay = `${Math.min(i * 0.06, 0.48)}s`;
+      const activeColorName = lang === "km" ? cfg.color.kmName : cfg.color.name;
+
       return `
         <article class="product-card" data-id="${p.id}" style="animation-delay:${delay}">
           <div class="product-art">
@@ -336,6 +434,52 @@ function render() {
             </div>
             <h3 class="product-title">${p.name}</h3>
             <p class="description">${lang === "km" ? p.km : p.desc}</p>
+            
+            <!-- Interactive Color Swatches & Storage Selector -->
+            <div class="card-config-box">
+              <div class="config-header">
+                <div class="config-label-group">
+                  <span>${t("colorLabel")}:</span>
+                  <span class="active-color-label" id="color-name-${p.id}">${activeColorName}</span>
+                </div>
+              </div>
+              <div class="color-swatches-row" role="radiogroup" aria-label="${t("colorLabel")}">
+                ${p.colors
+                  .map(
+                    (c, cIdx) => `
+                  <button
+                    type="button"
+                    class="color-swatch-dot ${cIdx === cfg.colorIndex ? "is-active" : ""}"
+                    style="--swatch-color: ${c.hex}; ${c.border ? `box-shadow: inset 0 0 0 1px ${c.border};` : ""}"
+                    data-color-btn="${p.id}"
+                    data-color-idx="${cIdx}"
+                    title="${lang === "km" ? c.kmName : c.name}"
+                    aria-label="${lang === "km" ? c.kmName : c.name}"
+                    aria-checked="${cIdx === cfg.colorIndex}"
+                  ></button>
+                `
+                  )
+                  .join("")}
+              </div>
+              <div class="storage-selector-row" role="radiogroup" aria-label="${t("storageLabel")}">
+                ${p.storageTiers
+                  .map(
+                    (s, sIdx) => `
+                  <button
+                    type="button"
+                    class="storage-pill-btn ${sIdx === cfg.storageIndex ? "is-active" : ""}"
+                    data-storage-btn="${p.id}"
+                    data-storage-idx="${sIdx}"
+                    aria-checked="${sIdx === cfg.storageIndex}"
+                  >
+                    ${s.size}
+                  </button>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+
             <div class="specs-pills" aria-label="Key specifications">
               <span class="spec-pill" title="${t("display")}">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -344,11 +488,11 @@ function render() {
                 </svg>
                 ${p.display}
               </span>
-              <span class="spec-pill" title="${t("storage")}">
+              <span class="spec-pill" id="spec-storage-${p.id}" title="${t("storage")}">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
-                ${p.storage}
+                <span class="spec-val-text">${cfg.storage}</span>
               </span>
               <span class="spec-pill" title="${t("camera")}">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -361,7 +505,7 @@ function render() {
             <div class="card-bottom">
               <div class="price-block">
                 <span class="price-meta">${t("reference")}</span>
-                <strong class="price-amount">${money(p.price)}</strong>
+                <strong class="price-amount" id="price-val-${p.id}">${money(cfg.price)}</strong>
               </div>
               <button class="button details-btn" data-detail="${p.id}" aria-label="${t("details")}: ${p.name}">
                 <span>${t("details")}</span>
@@ -397,12 +541,11 @@ function updateBar() {
     openBtn.disabled = selected.size < 2;
     const badgeEl = `<span class="compare-badge-count" id="compare-badge-count">(${selected.size})</span>`;
     openBtn.innerHTML = `<span>${t("compare")}</span> ${badgeEl}`;
-    // Trigger ping animation on badge
     requestAnimationFrame(() => {
       const badge = document.getElementById("compare-badge-count");
       if (badge) {
         badge.classList.remove("is-pinging");
-        void badge.offsetWidth; // force reflow to restart animation
+        void badge.offsetWidth;
         badge.classList.add("is-pinging");
       }
     });
@@ -437,15 +580,124 @@ function openDialog(content) {
   document.getElementById("close-modal").focus();
 }
 
+function updateModalTelegramLink(p) {
+  const cfg = getConfig(p.id);
+  const activeColorName = lang === "km" ? cfg.color.kmName : cfg.color.name;
+  const inquiryText = encodeURIComponent(
+    lang === "km"
+      ? `សួស្តី BobbyShop! ខ្ញុំចាប់អារម្មណ៍លើ ${p.name} ពណ៌ ${activeColorName} (${cfg.storage})។ តើមានស្តុក និងតម្លៃក្នុងស្រុកបច្ចុប្បន្នប៉ុន្មានដែរ?`
+      : `Hi BobbyShop! I am interested in the ${p.name} in ${activeColorName} (${cfg.storage}). What is the current local Phnom Penh price and availability?`
+  );
+  const tgBtn = document.getElementById("modal-telegram-btn");
+  if (tgBtn) {
+    tgBtn.href = `https://t.me/Bobbyplzy?text=${inquiryText}`;
+  }
+}
+
+function setColor(id, idx) {
+  if (!userConfig[id]) userConfig[id] = { colorIndex: 0, storageIndex: 0 };
+  userConfig[id].colorIndex = idx;
+
+  const p = products.find((item) => item.id === id);
+  if (!p) return;
+  const c = p.colors[idx];
+  const colorName = lang === "km" ? c.kmName : c.name;
+
+  // 1. Update card color buttons
+  document.querySelectorAll(`[data-color-btn="${id}"]`).forEach((btn) => {
+    const isThis = parseInt(btn.dataset.colorIdx, 10) === idx;
+    btn.classList.toggle("is-active", isThis);
+    btn.setAttribute("aria-checked", String(isThis));
+  });
+
+  // 2. Update card color name text
+  const labelEl = document.getElementById(`color-name-${id}`);
+  if (labelEl) {
+    labelEl.textContent = colorName;
+  }
+
+  // 3. Update modal if open
+  if (currentModal === id) {
+    const modalColorName = document.getElementById(`modal-color-name-${id}`);
+    if (modalColorName) modalColorName.textContent = colorName;
+
+    document.querySelectorAll(`[data-modal-color-btn="${id}"]`).forEach((btn) => {
+      const isThis = parseInt(btn.dataset.colorIdx, 10) === idx;
+      btn.classList.toggle("is-active", isThis);
+      btn.setAttribute("aria-checked", String(isThis));
+    });
+
+    updateModalTelegramLink(p);
+  }
+}
+
+function setStorage(id, idx) {
+  if (!userConfig[id]) userConfig[id] = { colorIndex: 0, storageIndex: 0 };
+  userConfig[id].storageIndex = idx;
+
+  const p = products.find((item) => item.id === id);
+  if (!p) return;
+  const tier = p.storageTiers[idx];
+
+  // 1. Update card storage buttons
+  document.querySelectorAll(`[data-storage-btn="${id}"]`).forEach((btn) => {
+    const isThis = parseInt(btn.dataset.storageIdx, 10) === idx;
+    btn.classList.toggle("is-active", isThis);
+    btn.setAttribute("aria-checked", String(isThis));
+  });
+
+  // 2. Update price in card with bump animation
+  const priceEl = document.getElementById(`price-val-${id}`);
+  if (priceEl) {
+    priceEl.textContent = money(tier.price);
+    priceEl.classList.remove("is-bumped");
+    void priceEl.offsetWidth;
+    priceEl.classList.add("is-bumped");
+  }
+
+  // 3. Update storage spec pill in card
+  const specStorageEl = document.getElementById(`spec-storage-${id}`);
+  if (specStorageEl) {
+    const valText = specStorageEl.querySelector(".spec-val-text");
+    if (valText) valText.textContent = tier.size;
+  }
+
+  // 4. Update modal if open
+  if (currentModal === id) {
+    const modalPrice = document.getElementById(`modal-price-val-${id}`);
+    if (modalPrice) {
+      modalPrice.textContent = money(tier.price);
+      modalPrice.classList.remove("is-bumped");
+      void modalPrice.offsetWidth;
+      modalPrice.classList.add("is-bumped");
+    }
+
+    const modalSpecStorage = document.getElementById(`modal-spec-storage-${id}`);
+    if (modalSpecStorage) {
+      modalSpecStorage.textContent = tier.size;
+    }
+
+    document.querySelectorAll(`[data-modal-storage-btn="${id}"]`).forEach((btn) => {
+      const isThis = parseInt(btn.dataset.storageIdx, 10) === idx;
+      btn.classList.toggle("is-active", isThis);
+      btn.setAttribute("aria-checked", String(isThis));
+    });
+
+    updateModalTelegramLink(p);
+  }
+}
+
 function detail(id) {
   const p = products.find((item) => item.id === id);
   if (!p) return;
   currentModal = id;
+  const cfg = getConfig(id);
+  const activeColorName = lang === "km" ? cfg.color.kmName : cfg.color.name;
 
   const inquiryText = encodeURIComponent(
     lang === "km"
-      ? `សួស្តី BobbyShop! ខ្ញុំចាប់អារម្មណ៍លើ ${p.name} (${p.storage})។ តើមានស្តុក និងតម្លៃក្នុងស្រុកបច្ចុប្បន្នប៉ុន្មានដែរ?`
-      : `Hi BobbyShop! I am interested in the ${p.name} (${p.storage}). What is the current local Phnom Penh price and availability?`
+      ? `សួស្តី BobbyShop! ខ្ញុំចាប់អារម្មណ៍លើ ${p.name} ពណ៌ ${activeColorName} (${cfg.storage})។ តើមានស្តុក និងតម្លៃក្នុងស្រុកបច្ចុប្បន្នប៉ុន្មានដែរ?`
+      : `Hi BobbyShop! I am interested in the ${p.name} in ${activeColorName} (${cfg.storage}). What is the current local Phnom Penh price and availability?`
   );
 
   openDialog(`
@@ -476,9 +728,60 @@ function detail(id) {
         <h2 id="modal-title" class="modal-title">${p.name}</h2>
         <p class="modal-desc">${lang === "km" ? p.km : p.desc}</p>
 
+        <!-- Interactive Color & Storage in Modal -->
+        <div class="modal-config-box">
+          <div>
+            <div class="modal-config-title-row">
+              <span class="modal-config-title">${t("colorLabel")}</span>
+              <span class="modal-active-color" id="modal-color-name-${p.id}">${activeColorName}</span>
+            </div>
+            <div class="modal-swatches-row" role="radiogroup" aria-label="${t("colorLabel")}">
+              ${p.colors
+                .map(
+                  (c, cIdx) => `
+                <button
+                  type="button"
+                  class="color-swatch-dot ${cIdx === cfg.colorIndex ? "is-active" : ""}"
+                  style="--swatch-color: ${c.hex}; ${c.border ? `box-shadow: inset 0 0 0 1px ${c.border};` : ""}"
+                  data-modal-color-btn="${p.id}"
+                  data-color-idx="${cIdx}"
+                  title="${lang === "km" ? c.kmName : c.name}"
+                  aria-label="${lang === "km" ? c.kmName : c.name}"
+                  aria-checked="${cIdx === cfg.colorIndex}"
+                ></button>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+
+          <div>
+            <div class="modal-config-title-row">
+              <span class="modal-config-title">${t("storageLabel")}</span>
+            </div>
+            <div class="modal-storage-row" role="radiogroup" aria-label="${t("storageLabel")}">
+              ${p.storageTiers
+                .map(
+                  (s, sIdx) => `
+                <button
+                  type="button"
+                  class="storage-pill-btn ${sIdx === cfg.storageIndex ? "is-active" : ""}"
+                  data-modal-storage-btn="${p.id}"
+                  data-storage-idx="${sIdx}"
+                  aria-checked="${sIdx === cfg.storageIndex}"
+                >
+                  ${s.size}
+                </button>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+        </div>
+
         <div class="modal-price-box">
           <div class="price-meta-label">${t("reference")} · USD</div>
-          <div class="modal-price-val">${money(p.price)}</div>
+          <div class="modal-price-val" id="modal-price-val-${p.id}">${money(cfg.price)}</div>
           <div class="price-disclaimer">${t("priceNote")}</div>
         </div>
 
@@ -497,7 +800,7 @@ function detail(id) {
           </div>
           <div class="spec-card">
             <div class="spec-card-label">${t("storage")}</div>
-            <div class="spec-card-val">${p.storage}</div>
+            <div class="spec-card-val" id="modal-spec-storage-${p.id}">${cfg.storage}</div>
           </div>
         </div>
 
@@ -512,6 +815,7 @@ function detail(id) {
         <div class="modal-actions-area">
           <a
             class="button telegram-primary-btn"
+            id="modal-telegram-btn"
             href="https://t.me/Bobbyplzy?text=${inquiryText}"
             target="_blank"
             rel="noopener"
@@ -544,18 +848,24 @@ function compare() {
           <tr>
             <th scope="col" class="sticky-col-header">${lang === "km" ? "លក្ខណៈសម្បត្តិ" : "Feature"}</th>
             ${list
-              .map(
-                (p) => `
+              .map((p) => {
+                const cfg = getConfig(p.id);
+                const activeColorName = lang === "km" ? cfg.color.kmName : cfg.color.name;
+                const tgCompareText = encodeURIComponent(
+                  lang === "km"
+                    ? `សួស្តី BobbyShop! ខ្ញុំកំពុងប្រៀបធៀប ${p.name} ពណ៌ ${activeColorName} (${cfg.storage})។ តើអាចផ្តល់តម្លៃជូនបានទេ?`
+                    : `Hi BobbyShop! I am comparing the ${p.name} in ${activeColorName} (${cfg.storage}). Can you provide a quote?`
+                );
+                return `
                 <th scope="col" class="phone-col-header">
                   <div class="compare-card-top">
                     <img src="assets/${p.image}.jpg" alt="${p.name}" width="90" height="90" class="compare-head-img" />
                     <div class="compare-head-name">${p.name}</div>
-                    <div class="compare-head-price">${money(p.price)}</div>
+                    <div class="compare-head-price">${money(cfg.price)}</div>
+                    <div style="font-size:11px;color:var(--muted);font-weight:600;margin-top:2px;">${activeColorName} · ${cfg.storage}</div>
                     <a
                       class="button compare-inquire-btn"
-                      href="https://t.me/Bobbyplzy?text=${encodeURIComponent(
-                        "Hi BobbyShop! I am comparing the " + p.name + ". Can you provide a quote?"
-                      )}"
+                      href="https://t.me/Bobbyplzy?text=${tgCompareText}"
                       target="_blank"
                       rel="noopener"
                     >
@@ -563,8 +873,8 @@ function compare() {
                     </a>
                   </div>
                 </th>
-              `
-              )
+              `;
+              })
               .join("")}
           </tr>
         </thead>
@@ -575,7 +885,21 @@ function compare() {
           </tr>
           <tr>
             <th scope="row" class="sticky-col">${t("reference")}</th>
-            ${list.map((p) => `<td class="price-cell">${money(p.price)}</td>`).join("")}
+            ${list.map((p) => `<td class="price-cell">${money(getConfig(p.id).price)}</td>`).join("")}
+          </tr>
+          <tr>
+            <th scope="row" class="sticky-col">${t("storageLabel")}</th>
+            ${list.map((p) => `<td><strong>${getConfig(p.id).storage}</strong></td>`).join("")}
+          </tr>
+          <tr>
+            <th scope="row" class="sticky-col">${t("colorLabel")}</th>
+            ${list
+              .map((p) => {
+                const cfg = getConfig(p.id);
+                const cName = lang === "km" ? cfg.color.kmName : cfg.color.name;
+                return `<td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${cfg.color.hex};vertical-align:middle;margin-right:5px;box-shadow:0 0 0 1px rgba(0,0,0,0.15);"></span> ${cName}</td>`;
+              })
+              .join("")}
           </tr>
           <tr>
             <th scope="row" class="sticky-col">${t("display")}</th>
@@ -589,10 +913,6 @@ function compare() {
             <th scope="row" class="sticky-col">${t("camera")}</th>
             ${list.map((p) => `<td>${p.camera}</td>`).join("")}
           </tr>
-          <tr>
-            <th scope="row" class="sticky-col">${t("storage")}</th>
-            ${list.map((p) => `<td>${p.storage}</td>`).join("")}
-          </tr>
         </tbody>
       </table>
     </div>
@@ -601,6 +921,7 @@ function compare() {
     </div>
   `);
 }
+
 function setLanguage() {
   const toast = document.getElementById("toast");
   if (toast) toast.hidden = true;
@@ -694,11 +1015,47 @@ if (searchClearEl) {
 
 document.getElementById("sort").addEventListener("change", render);
 
-// Delegate click on details buttons and active chips
+// Delegate click on details buttons, active chips, color swatches, and storage pills
 document.addEventListener("click", (e) => {
+  // Color swatch on card
+  const colorBtn = e.target.closest("[data-color-btn]");
+  if (colorBtn) {
+    const id = colorBtn.dataset.colorBtn;
+    const idx = parseInt(colorBtn.dataset.colorIdx, 10);
+    setColor(id, idx);
+    return;
+  }
+
+  // Color swatch in modal
+  const modalColorBtn = e.target.closest("[data-modal-color-btn]");
+  if (modalColorBtn) {
+    const id = modalColorBtn.dataset.modalColorBtn;
+    const idx = parseInt(modalColorBtn.dataset.colorIdx, 10);
+    setColor(id, idx);
+    return;
+  }
+
+  // Storage pill on card
+  const storageBtn = e.target.closest("[data-storage-btn]");
+  if (storageBtn) {
+    const id = storageBtn.dataset.storageBtn;
+    const idx = parseInt(storageBtn.dataset.storageIdx, 10);
+    setStorage(id, idx);
+    return;
+  }
+
+  // Storage pill in modal
+  const modalStorageBtn = e.target.closest("[data-modal-storage-btn]");
+  if (modalStorageBtn) {
+    const id = modalStorageBtn.dataset.modalStorageBtn;
+    const idx = parseInt(modalStorageBtn.dataset.storageIdx, 10);
+    setStorage(id, idx);
+    return;
+  }
+
+  // Details button
   const detailBtn = e.target.closest("[data-detail]");
   if (detailBtn) {
-    // Brief loading micro-interaction before modal opens
     detailBtn.classList.add("is-loading");
     setTimeout(() => {
       detail(detailBtn.dataset.detail);
@@ -707,6 +1064,7 @@ document.addEventListener("click", (e) => {
     return;
   }
 
+  // Remove compare item
   const removeThumb = e.target.closest("[data-remove-compare]");
   if (removeThumb) {
     const id = removeThumb.dataset.removeCompare;
@@ -715,6 +1073,7 @@ document.addEventListener("click", (e) => {
     return;
   }
 
+  // Active filter chip remove
   const activeChip = e.target.closest("[data-filter-type]");
   if (activeChip) {
     const type = activeChip.dataset.filterType;
