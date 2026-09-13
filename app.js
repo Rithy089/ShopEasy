@@ -1,3 +1,26 @@
+// --- Trade-In Value Estimator Data ---
+const tradeInModels = [
+  { id: "ip16pm", name: "iPhone 16 Pro Max", baseCredit: 680 },
+  { id: "ip16p", name: "iPhone 16 Pro", baseCredit: 560 },
+  { id: "ip16", name: "iPhone 16", baseCredit: 420 },
+  { id: "ip15pm", name: "iPhone 15 Pro Max", baseCredit: 480 },
+  { id: "ip15p", name: "iPhone 15 Pro", baseCredit: 400 },
+  { id: "ip15", name: "iPhone 15", baseCredit: 320 },
+  { id: "ip14pm", name: "iPhone 14 Pro Max", baseCredit: 340 },
+  { id: "s25u", name: "Galaxy S25 Ultra", baseCredit: 620 },
+  { id: "s25", name: "Galaxy S25 / S25+", baseCredit: 380 },
+  { id: "s24u", name: "Galaxy S24 Ultra", baseCredit: 420 },
+  { id: "s24", name: "Galaxy S24", baseCredit: 280 },
+];
+
+const tradeInConditions = [
+  { id: "flawless", name: "Like New / Flawless", kmName: "ស្អាតដូចថ្មី គ្មានស្នាម", multiplier: 1.0 },
+  { id: "good", name: "Good / Minor Wear", kmName: "ល្អ មានស្នាមតិចតួច", multiplier: 0.85 },
+  { id: "fair", name: "Fair / Signs of Use", kmName: "ល្មម មានស្នាមប្រើប្រាស់", multiplier: 0.65 },
+];
+
+let activeTradeIn = { modelId: "none", conditionId: "flawless" };
+
 // --- Theme Management (OLED Dark Mode / Light Mode) ---
 let currentTheme = "light";
 try {
@@ -694,17 +717,53 @@ function openDialog(content) {
   document.getElementById("close-modal").focus();
 }
 
+function getTradeInCalculation(targetPrice) {
+  if (activeTradeIn.modelId === "none") return null;
+  const model = tradeInModels.find((m) => m.id === activeTradeIn.modelId);
+  const cond = tradeInConditions.find((c) => c.id === activeTradeIn.conditionId) || tradeInConditions[0];
+  if (!model) return null;
+  const credit = Math.round(model.baseCredit * cond.multiplier);
+  const net = Math.max(0, targetPrice - credit);
+  return { model, cond, credit, net };
+}
+
+function updateModalTradeInDisplay(p) {
+  const cfg = getConfig(p.id);
+  const resultBox = document.getElementById("tradein-calc-result");
+  const creditVal = document.getElementById("tradein-credit-val");
+  const netVal = document.getElementById("tradein-net-val");
+  if (!resultBox || !creditVal || !netVal) return;
+
+  const calc = getTradeInCalculation(cfg.price);
+  if (!calc) {
+    resultBox.hidden = true;
+  } else {
+    resultBox.hidden = false;
+    creditVal.textContent = "- " + money(calc.credit);
+    netVal.textContent = money(calc.net);
+  }
+}
+
 function updateModalTelegramLink(p) {
   const cfg = getConfig(p.id);
   const activeColorName = lang === "km" ? cfg.color.kmName : cfg.color.name;
-  const inquiryText = encodeURIComponent(
-    lang === "km"
+  const calc = getTradeInCalculation(cfg.price);
+
+  let baseMsg = "";
+  if (calc) {
+    const condName = lang === "km" ? calc.cond.kmName : calc.cond.name;
+    baseMsg = lang === "km"
+      ? `សួស្តី BobbyShop! ខ្ញុំចង់ថែមលុយដូរស៊េរីទូរស័ព្ទ ${calc.model.name} (${condName}) យក ${p.name} ពណ៌ ${activeColorName} (${cfg.storage})។ តម្លៃប៉ាន់ស្មានទូរស័ព្ទចាស់ -${money(calc.credit)}, តម្លៃត្រូវបង់ ${money(calc.net)}។ តើខ្ញុំអាចយកឧបករណ៍ទៅត្រួតពិនិត្យបានទេ?`
+      : `Hi BobbyShop! I would like to trade in my ${calc.model.name} (${condName}) towards the ${p.name} in ${activeColorName} (${cfg.storage}). Estimated trade-in credit is -${money(calc.credit)}, net estimate is ${money(calc.net)}. Can you confirm inspection & quote?`;
+  } else {
+    baseMsg = lang === "km"
       ? `សួស្តី BobbyShop! ខ្ញុំចាប់អារម្មណ៍លើ ${p.name} ពណ៌ ${activeColorName} (${cfg.storage})។ តើមានស្តុក និងតម្លៃក្នុងស្រុកបច្ចុប្បន្នប៉ុន្មានដែរ?`
-      : `Hi BobbyShop! I am interested in the ${p.name} in ${activeColorName} (${cfg.storage}). What is the current local Phnom Penh price and availability?`
-  );
+      : `Hi BobbyShop! I am interested in the ${p.name} in ${activeColorName} (${cfg.storage}). What is the current local Phnom Penh price and availability?`;
+  }
+
   const tgBtn = document.getElementById("modal-telegram-btn");
   if (tgBtn) {
-    tgBtn.href = `https://t.me/Bobbyplzy?text=${inquiryText}`;
+    tgBtn.href = `https://t.me/Bobbyplzy?text=${encodeURIComponent(baseMsg)}`;
   }
 }
 
@@ -889,6 +948,42 @@ function detail(id) {
               `
                 )
                 .join("")}
+            </div>
+          </div>
+        </div>
+
+        <!-- Trade-In Value Calculator -->
+        <div class="modal-tradein-box">
+          <div class="tradein-header">
+            <span class="tradein-badge">
+              <span class="tradein-icon">🔄</span>
+              <span>${lang === "km" ? "ថែមលុយដូរស៊េរីទូរស័ព្ទចាស់" : "Trade-in your old phone"}</span>
+            </span>
+            <span class="tradein-tag">${lang === "km" ? "សន្សំដល់ $680" : "Save up to $680"}</span>
+          </div>
+          <div class="tradein-controls-grid">
+            <div class="tradein-select-wrap">
+              <label class="tradein-select-label" for="tradein-model-select">${lang === "km" ? "ម៉ូដែលទូរស័ព្ទបច្ចុប្បន្ន" : "Your current device"}</label>
+              <select id="tradein-model-select" class="tradein-select">
+                <option value="none">${lang === "km" ? "— គ្មានដូរស៊េរី —" : "— No trade-in —"}</option>
+                ${tradeInModels.map((m) => `<option value="${m.id}">${m.name} (~${money(m.baseCredit)})</option>`).join("")}
+              </select>
+            </div>
+            <div class="tradein-select-wrap">
+              <label class="tradein-select-label" for="tradein-condition-select">${lang === "km" ? "ស្ថានភាពទូរស័ព្ទ" : "Condition"}</label>
+              <select id="tradein-condition-select" class="tradein-select">
+                ${tradeInConditions.map((c) => `<option value="${c.id}">${lang === "km" ? c.kmName : c.name}</option>`).join("")}
+              </select>
+            </div>
+          </div>
+          <div class="tradein-calc-result" id="tradein-calc-result" hidden>
+            <div class="tradein-calc-left">
+              <span class="tradein-credit-label">${lang === "km" ? "តម្លៃប៉ាន់ស្មានទូរស័ព្ទចាស់" : "Estimated trade-in credit"}</span>
+              <span class="tradein-credit-amount" id="tradein-credit-val">- $0</span>
+            </div>
+            <div>
+              <div class="tradein-net-label">${lang === "km" ? "តម្លៃអ្នកត្រូវបង់ត្រឹមតែ" : "You pay only"}</div>
+              <div class="tradein-net-amount" id="tradein-net-val">$0</div>
             </div>
           </div>
         </div>
@@ -1766,3 +1861,20 @@ setupHeroCardTilt();
 setupProductCardsTilt();
 
 initQuiz();
+
+// Trade-In Dropdowns change listener
+document.addEventListener("change", (e) => {
+  if (e.target && (e.target.id === "tradein-model-select" || e.target.id === "tradein-condition-select")) {
+    const modelSelect = document.getElementById("tradein-model-select");
+    const condSelect = document.getElementById("tradein-condition-select");
+    if (modelSelect && condSelect && currentModal && currentModal !== "compare") {
+      activeTradeIn.modelId = modelSelect.value;
+      activeTradeIn.conditionId = condSelect.value;
+      const p = products.find((item) => item.id === currentModal);
+      if (p) {
+        updateModalTradeInDisplay(p);
+        updateModalTelegramLink(p);
+      }
+    }
+  }
+});
